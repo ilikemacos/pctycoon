@@ -9,16 +9,86 @@ const catalog = {
     'cpu_5800x3d': { name: 'AMD Ryzen 7 5800X3D (AM4 - DDR4 Only)', category: 'cpu', type: 'AM4', cost: 329, power: 105, score: 8100 },
     'cpu_5600x': { name: 'AMD Ryzen 5 5600X (AM4 - DDR4 Only)', category: 'cpu', type: 'AM4', cost: 189, power: 65, score: 5400 },
     
+    // ── NVIDIA GT Series ──
+    'nv_gt710': { name: 'NVIDIA GeForce GT 710 (2GB)', category: 'nvidia', cost: 35, score: 300 },
+    'nv_gt730': { name: 'NVIDIA GeForce GT 730 (4GB)', category: 'nvidia', cost: 55, score: 500 },
+    'nv_gt1030': { name: 'NVIDIA GeForce GT 1030 (2GB Pascal)', category: 'nvidia', cost: 79, score: 900 },
+    // ── NVIDIA GTX 700 Series ──
+    'nv_gtx750ti': { name: 'NVIDIA GeForce GTX 750 Ti (2GB Maxwell)', category: 'nvidia', cost: 49, score: 1200 },
+    'nv_gtx760': { name: 'NVIDIA GeForce GTX 760 (2GB Kepler)', category: 'nvidia', cost: 59, score: 1400 },
+    'nv_gtx770': { name: 'NVIDIA GeForce GTX 770 (2GB Kepler)', category: 'nvidia', cost: 69, score: 1700 },
+    'nv_gtx780': { name: 'NVIDIA GeForce GTX 780 (3GB Kepler)', category: 'nvidia', cost: 89, score: 2000 },
+    'nv_gtx780ti': { name: 'NVIDIA GeForce GTX 780 Ti (3GB Kepler)', category: 'nvidia', cost: 109, score: 2300 },
+    // ── NVIDIA GTX 900 Series ──
+    'nv_gtx960': { name: 'NVIDIA GeForce GTX 960 (2GB Maxwell)', category: 'nvidia', cost: 79, score: 1800 },
+    'nv_gtx970': { name: 'NVIDIA GeForce GTX 970 (4GB Maxwell)', category: 'nvidia', cost: 99, score: 2400 },
+    'nv_gtx980': { name: 'NVIDIA GeForce GTX 980 (4GB Maxwell)', category: 'nvidia', cost: 119, score: 2800 },
+    'nv_gtx980ti': { name: 'NVIDIA GeForce GTX 980 Ti (6GB Maxwell)', category: 'nvidia', cost: 149, score: 3300 },
+    // ── NVIDIA GTX 1000 Series ──
+    'nv_gtx1050ti': { name: 'NVIDIA GeForce GTX 1050 Ti (4GB Pascal)', category: 'nvidia', cost: 99, score: 2200 },
+    'nv_gtx1060': { name: 'NVIDIA GeForce GTX 1060 6GB (Pascal)', category: 'nvidia', cost: 139, score: 2900 },
+    'nv_gtx1070': { name: 'NVIDIA GeForce GTX 1070 (8GB Pascal)', category: 'nvidia', cost: 179, score: 3600 },
+    'nv_gtx1070ti': { name: 'NVIDIA GeForce GTX 1070 Ti (8GB Pascal)', category: 'nvidia', cost: 199, score: 3900 },
+    'nv_gtx1080': { name: 'NVIDIA GeForce GTX 1080 (8GB Pascal)', category: 'nvidia', cost: 229, score: 4400 },
+    'nv_gtx1080ti': { name: 'NVIDIA GeForce GTX 1080 Ti (11GB Pascal)', category: 'nvidia', cost: 279, score: 5200 },
+    // ── NVIDIA GTX 1600 Series ──
+    'nv_gtx1650': { name: 'NVIDIA GeForce GTX 1650 (4GB Turing)', category: 'nvidia', cost: 129, score: 2600 },
+    'nv_gtx1660': { name: 'NVIDIA GeForce GTX 1660 (6GB Turing)', category: 'nvidia', cost: 159, score: 3400 },
+    'nv_1660s': { name: 'NVIDIA GeForce GTX 1660 Super (6GB Turing)', category: 'nvidia', cost: 189, score: 4200 },
+    'nv_gtx1660ti': { name: 'NVIDIA GeForce GTX 1660 Ti (6GB Turing)', category: 'nvidia', cost: 199, score: 4500 },
     'nv_3060': { name: 'NVIDIA GeForce RTX 3060 (12GB Ampere)', category: 'nvidia', cost: 339, score: 8500 },
+    'nv_3070': { name: 'NVIDIA GeForce RTX 3070 (8GB Ampere)', category: 'nvidia', cost: 449, score: 11500 },
+    'nv_3080': { name: 'NVIDIA GeForce RTX 3080 (10GB Ampere)', category: 'nvidia', cost: 599, score: 14500 },
+    'nv_4060': { name: 'NVIDIA GeForce RTX 4060 (8GB Ada Lovelace)', category: 'nvidia', cost: 299, score: 9800 },
+    'nv_4070': { name: 'NVIDIA GeForce RTX 4070 (12GB Ada Lovelace)', category: 'nvidia', cost: 549, score: 15000 },
+    'nv_4070s': { name: 'NVIDIA GeForce RTX 4070 Super (12GB Ada Lovelace)', category: 'nvidia', cost: 599, score: 17000 },
+    'nv_4080': { name: 'NVIDIA GeForce RTX 4080 (16GB Ada Lovelace)', category: 'nvidia', cost: 999, score: 22000 },
+    'nv_4090': { name: 'NVIDIA GeForce RTX 4090 (24GB Ada Lovelace)', category: 'nvidia', cost: 1599, score: 28000 },
+    'nv_5060': { name: 'NVIDIA GeForce RTX 5060 (8GB Blackwell 2026)', category: 'nvidia', cost: 329, score: 11000 },
+    'nv_5070': { name: 'NVIDIA GeForce RTX 5070 (12GB Blackwell 2026)', category: 'nvidia', cost: 649, score: 19500 },
+    'nv_5070ti': { name: 'NVIDIA GeForce RTX 5070 Ti (16GB Blackwell 2026)', category: 'nvidia', cost: 899, score: 23000 },
+    'nv_5080': { name: 'NVIDIA GeForce RTX 5080 (16GB Blackwell 2026)', category: 'nvidia', cost: 1199, score: 31000 },
+    'nv_5090': { name: 'NVIDIA GeForce RTX 5090 (32GB Blackwell 2026)', category: 'nvidia', cost: 1999, score: 42000 },
+    // ── AMD GPUs ──
+    'amd_6600': { name: 'AMD Radeon RX 6600 (8GB RDNA 2)', category: 'amd', cost: 199, score: 5500 },
+    'amd_6700xt': { name: 'AMD Radeon RX 6700 XT (12GB RDNA 2)', category: 'amd', cost: 329, score: 9000 },
+    'amd_7600': { name: 'AMD Radeon RX 7600 (8GB RDNA 3)', category: 'amd', cost: 249, score: 8000 },
+    'amd_7700xt': { name: 'AMD Radeon RX 7700 XT (12GB RDNA 3)', category: 'amd', cost: 349, score: 11000 },
+    'amd_7800xt': { name: 'AMD Radeon RX 7800 XT (16GB RDNA 3)', category: 'amd', cost: 449, score: 14000 },
     'amd_7900xt': { name: 'AMD Radeon RX 7900 XT (20GB RDNA 3)', category: 'amd', cost: 849, score: 19500 },
-    'nv_5070ti': { name: 'NVIDIA GeForce RTX 5070 Ti (Blackwell 2026)', category: 'nvidia', cost: 899, score: 23000 },
-    'nv_5080': { name: 'NVIDIA GeForce RTX 5080 (Blackwell 2026)', category: 'nvidia', cost: 1199, score: 31000 },
+    'amd_7900xtx': { name: 'AMD Radeon RX 7900 XTX (24GB RDNA 3)', category: 'amd', cost: 999, score: 23500 },
+    'amd_9070': { name: 'AMD Radeon RX 9070 (16GB RDNA 4)', category: 'amd', cost: 549, score: 17500 },
+    'amd_9070xt': { name: 'AMD Radeon RX 9070 XT (16GB RDNA 4)', category: 'amd', cost: 699, score: 21000 },
     
+    // ── DDR4 RAM ──
+    'ram_venge_d4': { name: 'Corsair Vengeance LPX 16GB DDR4 3200MHz', category: 'ram', type: 'DDR4', cost: 55, score: 700 },
+    'ram_venge_d4_32': { name: 'Corsair Vengeance LPX 32GB DDR4 3600MHz', category: 'ram', type: 'DDR4', cost: 95, score: 900 },
+    'ram_trident_d4': { name: 'G.Skill Trident Z 32GB DDR4 4000MHz', category: 'ram', type: 'DDR4', cost: 115, score: 1050 },
+    'ram_hyper_d4': { name: 'Kingston HyperX Fury 16GB DDR4 3200MHz', category: 'ram', type: 'DDR4', cost: 45, score: 650 },
+    // ── DDR5 RAM ──
+    'ram_venge_d5': { name: 'Corsair Vengeance 32GB DDR5 5200MHz', category: 'ram', type: 'DDR5', cost: 99, score: 1000 },
     'ram_flare_d5': { name: 'G.Skill Flare X5 32GB DDR5 6000MHz', category: 'ram', type: 'DDR5', cost: 145, score: 1200 },
-    'ram_venge_d4': { name: 'Corsair Vengeance LPX 16GB DDR4 3200MHz', category: 'ram', type: 'DDR4', cost: 65, score: 700 },
+    'ram_trident_d5': { name: 'G.Skill Trident Z5 64GB DDR5 6400MHz', category: 'ram', type: 'DDR5', cost: 249, score: 1600 },
+    'ram_dominator_d5': { name: 'Corsair Dominator Titanium 32GB DDR5 7200MHz', category: 'ram', type: 'DDR5', cost: 199, score: 1450 },
+    'ram_fury_d5': { name: 'Kingston Fury Beast 32GB DDR5 5600MHz', category: 'ram', type: 'DDR5', cost: 119, score: 1100 },
     
-    'ssd_850x_2tb': { name: 'WD Black SN850X 2TB NVMe M.2 Gen4', category: 'ssd', cost: 209, score: 1500 },
+    // ── SATA SSDs ──
+    'ssd_mx500_500': { name: 'Crucial MX500 500GB SATA SSD', category: 'ssd', cost: 49, score: 400 },
+    'ssd_870evo_1tb': { name: 'Samsung 870 EVO 1TB SATA SSD', category: 'ssd', cost: 89, score: 550 },
+    'ssd_870evo_2tb': { name: 'Samsung 870 EVO 2TB SATA SSD', category: 'ssd', cost: 149, score: 650 },
+    // ── Gen3 NVMe ──
+    'ssd_sn770_1tb': { name: 'WD Blue SN570 1TB NVMe Gen3 M.2', category: 'ssd', cost: 69, score: 750 },
+    'ssd_970evo_1tb': { name: 'Samsung 970 EVO Plus 1TB NVMe Gen3', category: 'ssd', cost: 99, score: 850 },
+    // ── Gen4 NVMe ──
     'ssd_crucial_1tb': { name: 'Crucial P3 Plus 1TB Gen4 M.2', category: 'ssd', cost: 79, score: 950 },
+    'ssd_990pro_1tb': { name: 'Samsung 990 Pro 1TB NVMe Gen4 M.2', category: 'ssd', cost: 119, score: 1200 },
+    'ssd_990pro_2tb': { name: 'Samsung 990 Pro 2TB NVMe Gen4 M.2', category: 'ssd', cost: 189, score: 1350 },
+    'ssd_850x_2tb': { name: 'WD Black SN850X 2TB NVMe Gen4 M.2', category: 'ssd', cost: 209, score: 1500 },
+    'ssd_sn850x_4tb': { name: 'WD Black SN850X 4TB NVMe Gen4 M.2', category: 'ssd', cost: 349, score: 1650 },
+    // ── Gen5 NVMe ──
+    'ssd_t705_1tb': { name: 'Crucial T705 1TB NVMe Gen5 M.2', category: 'ssd', cost: 179, score: 1800 },
+    'ssd_t705_2tb': { name: 'Crucial T705 2TB NVMe Gen5 M.2', category: 'ssd', cost: 299, score: 2000 },
+    'ssd_990pro5_2tb': { name: 'Samsung 9100 Pro 2TB NVMe Gen5 M.2', category: 'ssd', cost: 329, score: 2200 },
     
     'cooler_pa120': { name: 'Thermalright Peerless Assassin 120 Air', category: 'cooler', cost: 44, score: 100 },
     'cooler_aio_360': { name: 'Deepcool LS720 360mm AIO Liquid', category: 'cooler', cost: 149, score: 250 },
@@ -138,7 +208,7 @@ let currentQuestionIdx = 0;
 let selectedQuizAnswer = null;
 let quizEvaluated = false;
 
-// ── SUPABASE INIT (Ver 1.5b Teton) ──────────────────────────────────────
+// ── SUPABASE INIT (Ver 1.5.2a Tetonic) ──────────────────────────────────────
 const SUPABASE_URL = "https://hkuwkajmgieptgotgmuc.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhrdXdrYWptZ2llcHRnb3RnbXVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyMjE2NjksImV4cCI6MjA5Njc5NzY2OX0.GJhJAE5WlRDNxO9BprFewK75lir4cHnJ_0W-v246-SQ";
 const { createClient } = supabase;
@@ -847,7 +917,7 @@ async function adminAdjustFunds(username, action) {
     renderAdminPanel();
 }
 
-// ── STUDY GUIDE + PAGE SWITCHING (Ver 1.5b Teton) ─────────────────────────
+// ── STUDY GUIDE + PAGE SWITCHING (Ver 1.5.2a Tetonic) ─────────────────────────
 
 let currentStudyTopic = 'all';
 
