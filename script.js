@@ -138,7 +138,7 @@ let currentQuestionIdx = 0;
 let selectedQuizAnswer = null;
 let quizEvaluated = false;
 
-// ── SUPABASE INIT (Ver 1.5 a2) ──────────────────────────────────────
+// ── SUPABASE INIT (Ver 1.5.1a Teton) ──────────────────────────────────────
 const SUPABASE_URL = "https://hkuwkajmgieptgotgmuc.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhrdXdrYWptZ2llcHRnb3RnbXVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyMjE2NjksImV4cCI6MjA5Njc5NzY2OX0.GJhJAE5WlRDNxO9BprFewK75lir4cHnJ_0W-v246-SQ";
 const { createClient } = supabase;
@@ -166,8 +166,15 @@ async function loadAccountsFromDisk() {
         }
         // Migrate any localStorage accounts up to Supabase
         await migrateLocalStorageToSupabase();
-        renderProfilesTray();
-        showAuthOverlay();
+
+        // Auto-login if a saved session exists
+        const savedUser = sessionStorage.getItem('tycoon_active_user');
+        if (savedUser && gameState.users[savedUser]) {
+            applyUserProfile(savedUser);
+        } else {
+            renderProfilesTray();
+            showAuthOverlay();
+        }
     } catch(err) {
         console.error('Supabase load error:', err);
         const raw = localStorage.getItem('PC_Hardware_Tycoon_2026_Accounts_v12');
@@ -292,6 +299,7 @@ function accountLogin() {
 }
 
 function applyUserProfile(username) {
+    sessionStorage.setItem('tycoon_active_user', username);
     gameState.activeUser = username;
     saveAccountsToDisk();
     document.getElementById('auth-box').style.display = 'none';
@@ -315,6 +323,7 @@ async function accountLogout() {
             }, { onConflict: 'username' });
         } catch(e) { console.warn('Logout save error:', e); }
     }
+    sessionStorage.removeItem('tycoon_active_user');
     gameState.activeUser = null;
     showAuthOverlay();
 }
@@ -838,7 +847,7 @@ async function adminAdjustFunds(username, action) {
     renderAdminPanel();
 }
 
-// ── STUDY GUIDE + PAGE SWITCHING (Ver 1.5 a2) ─────────────────────────
+// ── STUDY GUIDE + PAGE SWITCHING (Ver 1.5.1a Teton) ─────────────────────────
 
 let currentStudyTopic = 'all';
 
