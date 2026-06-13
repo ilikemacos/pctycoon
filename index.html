@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 Ultimate PC Hardware Tycoon Simulator - Ver 1.4.10 Diablo</title>
+    <title>2026 Ultimate PC Hardware Tycoon Simulator - Ver 1.5 a2</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Supabase SDK (Ver 1.5 a2) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js"></script>
 </head>
 <body>
 
 <!-- User Authentication Panel Overlay -->
 <div class="account-auth-panel" id="auth-box">
     <div class="auth-header">
-        <div class="version-banner" style="background: linear-gradient(135deg, #eab308, #ca8a04); color: #0f172a; font-weight: 900;">VERSION 1.4.10 [DIABLO]</div>
+        <div class="version-banner" style="background: linear-gradient(135deg, #eab308, #ca8a04); color: #0f172a; font-weight: 900;">VERSION 1.5 [A2]</div>
         <h3>🔐 Tycoon Profile Authentication Terminal</h3>
         <p>Log into an existing enterprise partition or establish a new hardware developer account profile.</p>
     </div>
@@ -44,25 +46,33 @@
     </div>
 
 
-    <!-- MZX ADMIN PANEL (ver 1.4.10 Diablo) -->
+    <!-- PAGE NAVIGATION TABS -->
+    <div style="display:flex; gap:10px; max-width:1300px; margin: 0 auto 15px auto;">
+        <button onclick="switchPage('game')" id="page-tab-game" style="background:#eab308; color:#0f172a; border:none; padding:10px 28px; border-radius:8px; font-weight:900; font-size:10pt; cursor:pointer;">🎮 Tycoon</button>
+        <button onclick="switchPage('study')" id="page-tab-study" style="background:#1e293b; color:#e2e8f0; border:2px solid #475569; padding:10px 28px; border-radius:8px; font-weight:900; font-size:10pt; cursor:pointer;">📚 Study Guide</button>
+    </div>
+
+    <!-- MZX ADMIN PANEL (ver 1.5 a2) -->
     <div id="mzx-admin-panel" style="display:none; max-width:1300px; margin: 0 auto 20px auto;">
         <div style="background: rgba(15,23,42,0.85); border: 2px solid #ef4444; border-radius: 12px; padding: 20px; box-shadow: 0 0 25px rgba(239,68,68,0.2);">
             <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap;">
-                <span style="background:linear-gradient(135deg,#ef4444,#b91c1c); color:white; font-weight:900; font-size:8pt; padding:3px 10px; border-radius:4px;">🔴 ADMIN ACCESS — VER 1.4.10 DIABLO</span>
+                <span style="background:linear-gradient(135deg,#ef4444,#b91c1c); color:white; font-weight:900; font-size:8pt; padding:3px 10px; border-radius:4px;">🔴 ADMIN ACCESS — VER 1.5 A2</span>
                 <h3 style="color:#f87171; margin:0; font-size:12pt;">⚙️ Account Management Terminal</h3>
             </div>
             <div id="admin-accounts-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap:12px;"></div>
         </div>
     </div>
 
+    <!-- GAME PAGE -->
+    <div id="page-game" style="display:block;">
     <div class="container">
         <header style="border-bottom: 2px solid #eab308;">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
                 <div>
                     <h1>2026 Ultimate Hardware Tycoon Simulator</h1>
-                    <p>🚨 <strong>Ver 1.4.10 Diablo Update:</strong> Real-time hardware analytics are online. Put your constructed machines through rigorous 3DMark and Cinebench synthetic sweeps to measure raw frame computation speeds, processor capacity, and unlock scale bonuses!</p>
+                    <p>🚨 <strong>Ver 1.5 a2 Update:</strong> Real-time hardware analytics are online. Put your constructed machines through rigorous 3DMark and Cinebench synthetic sweeps to measure raw frame computation speeds, processor capacity, and unlock scale bonuses!</p>
                 </div>
-                <div class="version-badge-top" style="background: linear-gradient(135deg, #f59e0b, #eab308); color: #0f172a; font-weight: 900;">VER 1.4.10 DIABLO</div>
+                <div class="version-badge-top" style="background: linear-gradient(135deg, #f59e0b, #eab308); color: #0f172a; font-weight: 900;">VER 1.5 A2</div>
             </div>
         </header>
 
@@ -154,7 +164,7 @@
                 <div class="shop-grid" id="shop-container"></div>
             </div>
 
-            <!-- MODULE D: SYSTEM RE-BENCHMARKING MATRIX (NEW IN VER 1.4.10) -->
+            <!-- MODULE D: SYSTEM RE-BENCHMARKING MATRIX (NEW IN VER 1.5 A2) -->
             <div class="panel benchmark-box" style="border: 2px solid #eab308; grid-column: 1 / -1; background: rgba(234, 179, 8, 0.01);">
                 <h3 style="color: #eab308; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
                     <span>📊</span> Live Station Engine Benchmarking Lab & Stress Tester
@@ -275,6 +285,36 @@
 
         </div>
     </div>
+    </div><!-- end page-game -->
+
+    <!-- STUDY GUIDE PAGE -->
+    <div id="page-study" style="display:none; max-width:1300px; margin:0 auto;">
+        <div style="background:rgba(15,23,42,0.85); border:2px solid #38bdf8; border-radius:12px; padding:25px; box-shadow:0 0 25px rgba(56,189,248,0.1);">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; margin-bottom:18px;">
+                <div>
+                    <h2 style="color:#38bdf8; margin-bottom:4px;">📚 Hardware Study Guide</h2>
+                    <p style="color:#94a3b8; font-size:9pt;">Master these topics to ace the Quiz Academy and earn more CAD! <span id="study-count" style="color:#eab308; font-weight:bold;"></span></p>
+                </div>
+                <input type="text" id="study-search" oninput="renderStudyCards(currentStudyTopic)" placeholder="🔍 Search questions..." style="background:#0f172a; border:1px solid #475569; color:#f8fafc; padding:9px 14px; border-radius:8px; font-size:9pt; width:220px;">
+            </div>
+
+            <!-- Topic filter tabs -->
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px;" id="study-topic-tabs">
+                <button onclick="filterStudy('all')" class="study-tab active-study-tab" data-topic="all">All Topics</button>
+                <button onclick="filterStudy('CPUs')" class="study-tab" data-topic="CPUs">🔲 CPUs</button>
+                <button onclick="filterStudy('GPUs')" class="study-tab" data-topic="GPUs">🎮 GPUs</button>
+                <button onclick="filterStudy('RAM')" class="study-tab" data-topic="RAM">💾 RAM</button>
+                <button onclick="filterStudy('Storage')" class="study-tab" data-topic="Storage">💿 Storage</button>
+                <button onclick="filterStudy('Displays')" class="study-tab" data-topic="Displays">🖥️ Displays</button>
+                <button onclick="filterStudy('Cooling')" class="study-tab" data-topic="Cooling">❄️ Cooling</button>
+                <button onclick="filterStudy('General')" class="study-tab" data-topic="General">⚙️ General</button>
+            </div>
+
+            <!-- Study cards grid -->
+            <div id="study-cards-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); gap:14px;"></div>
+        </div>
+    </div>
+
 </div>
 
 <script src="script.js"></script>

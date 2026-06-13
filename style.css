@@ -67,3 +67,30 @@ h2 { color: #38bdf8; font-size: 15pt; margin-bottom: 15px; border-left: 5px soli
 .visual-pc-tower { background: rgba(30, 41, 59, 0.4); border: 4px solid #3f3f46; border-right-width: 12px; border-radius: 6px; height: 220px; position: relative; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; }
 .case-glow-indicator { position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none; }
 .hardware-die-block { background: #1e293b; border: 1px solid #475569; border-radius: 4px; padding: 6px 10px; font-size: 8pt; font-family: monospace; color: #94a3b8; }
+
+/* ── Study Guide Page (Ver 1.5.0 Kepler) ── */
+.study-tab {
+    background: #1e293b; border: 1px solid #475569; color: #cbd5e1;
+    padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 8.5pt;
+    font-weight: 600; transition: all 0.15s;
+}
+.study-tab:hover { border-color: #38bdf8; color: #38bdf8; }
+.active-study-tab { background: #0ea5e9 !important; color: white !important; border-color: #38bdf8 !important; }
+
+.study-card {
+    background: rgba(30,41,59,0.7); border: 1px solid rgba(56,189,248,0.15);
+    border-radius: 10px; padding: 16px; transition: border-color 0.2s;
+}
+.study-card:hover { border-color: rgba(56,189,248,0.4); }
+.study-card-topic {
+    font-size: 7.5pt; font-weight: 900; color: #0ea5e9;
+    background: rgba(14,165,233,0.12); padding: 2px 8px;
+    border-radius: 10px; display: inline-block; margin-bottom: 10px;
+}
+.study-card-question { color: #f8fafc; font-size: 9.5pt; font-weight: 700; margin-bottom: 10px; line-height: 1.4; }
+.study-card-answer {
+    background: rgba(34,197,94,0.1); border-left: 3px solid #22c55e;
+    padding: 8px 12px; border-radius: 0 6px 6px 0; color: #4ade80;
+    font-size: 9pt; font-weight: 600;
+}
+.study-card-answer::before { content: "✅ "; }
