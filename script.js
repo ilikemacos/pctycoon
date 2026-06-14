@@ -384,7 +384,7 @@ function applyUserProfile(username) {
     document.getElementById('auth-box').style.display = 'none';
     document.getElementById('main-game-workspace').style.display = 'block';
     document.getElementById('hud-user').innerText = username;
-    renderShop(); loadNextQuestion(); updateHUD(); renderProfilesTray(); resetBenchmarkDisplay(); renderAdminPanel(); updateOnlinePresence(); setInterval(updateOnlinePresence, 60000); checkDailyStreak();
+    renderShop(); loadNextQuestion(); updateHUD(); renderProfilesTray(); resetBenchmarkDisplay(); renderAdminPanel(); updateOnlinePresence(); setInterval(updateOnlinePresence, 60000); checkDailyStreak(); setInterval(checkAchievements, 10000);
 }
 
 async function accountLogout() {
@@ -438,7 +438,7 @@ function updateHUD() {
     for (let key in currentUser.inventory) { totalParts += currentUser.inventory[key]; }
     document.getElementById('hud-parts').innerText = totalParts + " Pcs";
     document.getElementById('hud-builds').innerText = currentUser.builds + " Built";
-    renderInventoryAndSelectors(); renderShopButtons(); updatePrebuiltButtons(); renderAdminPanel(); renderAchievements(); renderLevelBar();
+    renderInventoryAndSelectors(); renderShopButtons(); updatePrebuiltButtons(); renderAdminPanel(); renderLevelBar();
 }
 
 function filterShop(category) {
@@ -896,20 +896,71 @@ async function renderAdminPanel() {
                 </div>
                 <div style="margin-top:10px; border-top:1px solid #1e293b; padding-top:10px;">
                     <div style="font-size:7.5pt; color:#94a3b8; margin-bottom:6px; font-weight:bold;">GRANT ACHIEVEMENT</div>
+                    <select id="admin-ach-${username}" style="width:100%; background:#0f172a; border:1px solid #475569; color:#f8fafc; padding:6px 8px; border-radius:5px; font-size:8pt; margin-bottom:6px;">
+                        <option value="">-- Select Achievement --</option>
+                        ${achOptions}
+                    </select>
                     <div style="display:flex; gap:6px;">
-                        <select id="admin-ach-${username}" style="flex:1; background:#0f172a; border:1px solid #475569; color:#f8fafc; padding:6px 8px; border-radius:5px; font-size:8pt;">
-                            <option value="">-- Select Achievement --</option>
-                            ${achOptions}
-                        </select>
                         <button
                             onclick="adminGrantAchievement('${username}')"
-                            style="background:#a855f7; border:none; border-bottom:3px solid #7e22ce; color:white; padding:6px 12px; font-weight:bold; border-radius:6px; cursor:pointer; font-size:8pt;">
-                            Grant
+                            style="flex:1; background:#a855f7; border:none; border-bottom:3px solid #7e22ce; color:white; padding:7px; font-weight:bold; border-radius:6px; cursor:pointer; font-size:8.5pt;">
+                            Grant Selected
+                        </button>
+                        <button
+                            onclick="adminGrantAllAchievements('${username}')"
+                            style="flex:1; background:#0ea5e9; border:none; border-bottom:3px solid #0369a1; color:white; padding:7px; font-weight:bold; border-radius:6px; cursor:pointer; font-size:8.5pt;">
+                            Grant All
                         </button>
                     </div>
                 </div>
             </div>`;
     });
+}
+
+async function adminGrantAllAchievements(username) {
+    const user = gameState.users[username];
+    if (!user) return;
+    if (!confirm('Grant ALL achievements to ' + username + '? This will award all tier rewards.')) return;
+    if (!user.unlockedAchievements) user.unlockedAchievements = [];
+
+    let totalReward = 0;
+    let count = 0;
+    ACHIEVEMENTS.forEach(function(a) {
+        if (!user.unlockedAchievements.includes(a.id)) {
+            const tier = TIER_CONFIG[a.tier] || TIER_CONFIG.normal;
+            user.unlockedAchievements.push(a.id);
+            user.points += tier.reward;
+            totalReward += tier.reward;
+            count++;
+        }
+    });
+
+    if (count === 0) { alert(username + ' already has all achievements.'); return; }
+
+    try {
+        await db.from('users').upsert({
+            username: username,
+            password: user.password,
+            points: user.points,
+            builds: user.builds,
+            inventory: user.inventory,
+            unlocked_achievements: user.unlockedAchievements,
+            benchmarks: user.benchmarks || 0,
+            correct: user.correct || 0,
+            chat_messages: user.chatMessages || 0,
+            level: user.level || 1,
+            xp: user.xp || 0,
+            prestige: user.prestige || 0,
+            streak: user.streak || 0,
+            last_login: user.lastLogin || ''
+        }, { onConflict: 'username' });
+        alert('Granted ' + count + ' achievements to ' + username + '. Total reward: +$' + totalReward.toLocaleString() + ' CAD.');
+    } catch(e) {
+        alert('Error saving: ' + e.message);
+    }
+
+    if (username === gameState.activeUser) updateHUD();
+    renderAdminPanel();
 }
 
 async function adminGrantAchievement(username) {
@@ -1130,23 +1181,19 @@ const ACHIEVEMENTS = [
     { id: 'all_gpus',       tier: 'ultra_legendary', name: 'GPU Collector',      desc: 'Own every single GPU in the shop.',                             check: (u) => ['nv_gt710','nv_gt730','nv_gt1030','nv_gtx750ti','nv_gtx760','nv_gtx770','nv_gtx780','nv_gtx780ti','nv_gtx960','nv_gtx970','nv_gtx980','nv_gtx980ti','nv_gtx1050ti','nv_gtx1060','nv_gtx1070','nv_gtx1070ti','nv_gtx1080','nv_gtx1080ti','nv_gtx1650','nv_gtx1660','nv_1660s','nv_gtx1660ti','nv_3060','nv_3070','nv_3080','nv_4060','nv_4070','nv_4070s','nv_4080','nv_4090','nv_5060','nv_5070','nv_5070ti','nv_5080','nv_5090','amd_6600','amd_6700xt','amd_7600','amd_7700xt','amd_7800xt','amd_7900xt','amd_7900xtx','amd_9070','amd_9070xt'].every(k => (u.inventory[k]||0)>=1) },
 ];
 
-async function renderAchievements() {
-    const grid = document.getElementById('achievements-grid');
-    if (!grid || !gameState.activeUser) return;
+async function checkAchievements() {
+    if (!gameState.activeUser) return;
     const user = gameState.users[gameState.activeUser];
     if (!user.unlockedAchievements) user.unlockedAchievements = [];
-
     let newlyUnlocked = [];
     ACHIEVEMENTS.forEach(function(a) {
-        const unlocked = a.check(user);
-        if (unlocked && !user.unlockedAchievements.includes(a.id)) {
+        if (a.check(user) && !user.unlockedAchievements.includes(a.id)) {
             const tier = TIER_CONFIG[a.tier] || TIER_CONFIG.normal;
             user.unlockedAchievements.push(a.id);
             newlyUnlocked.push({ name: a.name, reward: tier.reward, tier: tier.label });
             user.points += tier.reward;
         }
     });
-
     if (newlyUnlocked.length > 0) {
         await saveAccountsToDisk();
         updateHUD();
@@ -1154,6 +1201,13 @@ async function renderAchievements() {
             logWorkshop('[' + a.tier + '] Achievement unlocked: ' + a.name + ' — +$' + a.reward.toLocaleString() + ' CAD!');
         });
     }
+}
+
+async function renderAchievements() {
+    const grid = document.getElementById('achievements-grid');
+    if (!grid || !gameState.activeUser) return;
+    const user = gameState.users[gameState.activeUser];
+    if (!user.unlockedAchievements) user.unlockedAchievements = [];
 
     // Group by tier for display
     const tierOrder = ['ultra_legendary','legendary','mythic','epic','super_rare','rare','normal'];
