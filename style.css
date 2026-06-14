@@ -94,3 +94,8 @@ h2 { color: #38bdf8; font-size: 15pt; margin-bottom: 15px; border-left: 5px soli
     font-size: 9pt; font-weight: 600;
 }
 .study-card-answer::before { content: "✅ "; }
+
+/* ── Community + Achievements (Ver 1.5.2a Tetonic) ── */
+#chat-messages::-webkit-scrollbar { width: 4px; }
+#chat-messages::-webkit-scrollbar-track { background: transparent; }
+#chat-messages::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }

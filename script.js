@@ -9,29 +9,29 @@ const catalog = {
     'cpu_5800x3d': { name: 'AMD Ryzen 7 5800X3D (AM4 - DDR4 Only)', category: 'cpu', type: 'AM4', cost: 329, power: 105, score: 8100 },
     'cpu_5600x': { name: 'AMD Ryzen 5 5600X (AM4 - DDR4 Only)', category: 'cpu', type: 'AM4', cost: 189, power: 65, score: 5400 },
     
-    // ── NVIDIA GT Series ──
+    //  NVIDIA GT Series 
     'nv_gt710': { name: 'NVIDIA GeForce GT 710 (2GB)', category: 'nvidia', cost: 35, score: 300 },
     'nv_gt730': { name: 'NVIDIA GeForce GT 730 (4GB)', category: 'nvidia', cost: 55, score: 500 },
     'nv_gt1030': { name: 'NVIDIA GeForce GT 1030 (2GB Pascal)', category: 'nvidia', cost: 79, score: 900 },
-    // ── NVIDIA GTX 700 Series ──
+    //  NVIDIA GTX 700 Series 
     'nv_gtx750ti': { name: 'NVIDIA GeForce GTX 750 Ti (2GB Maxwell)', category: 'nvidia', cost: 49, score: 1200 },
     'nv_gtx760': { name: 'NVIDIA GeForce GTX 760 (2GB Kepler)', category: 'nvidia', cost: 59, score: 1400 },
     'nv_gtx770': { name: 'NVIDIA GeForce GTX 770 (2GB Kepler)', category: 'nvidia', cost: 69, score: 1700 },
     'nv_gtx780': { name: 'NVIDIA GeForce GTX 780 (3GB Kepler)', category: 'nvidia', cost: 89, score: 2000 },
     'nv_gtx780ti': { name: 'NVIDIA GeForce GTX 780 Ti (3GB Kepler)', category: 'nvidia', cost: 109, score: 2300 },
-    // ── NVIDIA GTX 900 Series ──
+    //  NVIDIA GTX 900 Series 
     'nv_gtx960': { name: 'NVIDIA GeForce GTX 960 (2GB Maxwell)', category: 'nvidia', cost: 79, score: 1800 },
     'nv_gtx970': { name: 'NVIDIA GeForce GTX 970 (4GB Maxwell)', category: 'nvidia', cost: 99, score: 2400 },
     'nv_gtx980': { name: 'NVIDIA GeForce GTX 980 (4GB Maxwell)', category: 'nvidia', cost: 119, score: 2800 },
     'nv_gtx980ti': { name: 'NVIDIA GeForce GTX 980 Ti (6GB Maxwell)', category: 'nvidia', cost: 149, score: 3300 },
-    // ── NVIDIA GTX 1000 Series ──
+    //  NVIDIA GTX 1000 Series 
     'nv_gtx1050ti': { name: 'NVIDIA GeForce GTX 1050 Ti (4GB Pascal)', category: 'nvidia', cost: 99, score: 2200 },
     'nv_gtx1060': { name: 'NVIDIA GeForce GTX 1060 6GB (Pascal)', category: 'nvidia', cost: 139, score: 2900 },
     'nv_gtx1070': { name: 'NVIDIA GeForce GTX 1070 (8GB Pascal)', category: 'nvidia', cost: 179, score: 3600 },
     'nv_gtx1070ti': { name: 'NVIDIA GeForce GTX 1070 Ti (8GB Pascal)', category: 'nvidia', cost: 199, score: 3900 },
     'nv_gtx1080': { name: 'NVIDIA GeForce GTX 1080 (8GB Pascal)', category: 'nvidia', cost: 229, score: 4400 },
     'nv_gtx1080ti': { name: 'NVIDIA GeForce GTX 1080 Ti (11GB Pascal)', category: 'nvidia', cost: 279, score: 5200 },
-    // ── NVIDIA GTX 1600 Series ──
+    //  NVIDIA GTX 1600 Series 
     'nv_gtx1650': { name: 'NVIDIA GeForce GTX 1650 (4GB Turing)', category: 'nvidia', cost: 129, score: 2600 },
     'nv_gtx1660': { name: 'NVIDIA GeForce GTX 1660 (6GB Turing)', category: 'nvidia', cost: 159, score: 3400 },
     'nv_1660s': { name: 'NVIDIA GeForce GTX 1660 Super (6GB Turing)', category: 'nvidia', cost: 189, score: 4200 },
@@ -49,7 +49,7 @@ const catalog = {
     'nv_5070ti': { name: 'NVIDIA GeForce RTX 5070 Ti (16GB Blackwell 2026)', category: 'nvidia', cost: 899, score: 23000 },
     'nv_5080': { name: 'NVIDIA GeForce RTX 5080 (16GB Blackwell 2026)', category: 'nvidia', cost: 1199, score: 31000 },
     'nv_5090': { name: 'NVIDIA GeForce RTX 5090 (32GB Blackwell 2026)', category: 'nvidia', cost: 1999, score: 42000 },
-    // ── AMD GPUs ──
+    //  AMD GPUs 
     'amd_6600': { name: 'AMD Radeon RX 6600 (8GB RDNA 2)', category: 'amd', cost: 199, score: 5500 },
     'amd_6700xt': { name: 'AMD Radeon RX 6700 XT (12GB RDNA 2)', category: 'amd', cost: 329, score: 9000 },
     'amd_7600': { name: 'AMD Radeon RX 7600 (8GB RDNA 3)', category: 'amd', cost: 249, score: 8000 },
@@ -60,32 +60,32 @@ const catalog = {
     'amd_9070': { name: 'AMD Radeon RX 9070 (16GB RDNA 4)', category: 'amd', cost: 549, score: 17500 },
     'amd_9070xt': { name: 'AMD Radeon RX 9070 XT (16GB RDNA 4)', category: 'amd', cost: 699, score: 21000 },
     
-    // ── DDR4 RAM ──
+    //  DDR4 RAM 
     'ram_venge_d4': { name: 'Corsair Vengeance LPX 16GB DDR4 3200MHz', category: 'ram', type: 'DDR4', cost: 55, score: 700 },
     'ram_venge_d4_32': { name: 'Corsair Vengeance LPX 32GB DDR4 3600MHz', category: 'ram', type: 'DDR4', cost: 95, score: 900 },
     'ram_trident_d4': { name: 'G.Skill Trident Z 32GB DDR4 4000MHz', category: 'ram', type: 'DDR4', cost: 115, score: 1050 },
     'ram_hyper_d4': { name: 'Kingston HyperX Fury 16GB DDR4 3200MHz', category: 'ram', type: 'DDR4', cost: 45, score: 650 },
-    // ── DDR5 RAM ──
+    //  DDR5 RAM 
     'ram_venge_d5': { name: 'Corsair Vengeance 32GB DDR5 5200MHz', category: 'ram', type: 'DDR5', cost: 99, score: 1000 },
     'ram_flare_d5': { name: 'G.Skill Flare X5 32GB DDR5 6000MHz', category: 'ram', type: 'DDR5', cost: 145, score: 1200 },
     'ram_trident_d5': { name: 'G.Skill Trident Z5 64GB DDR5 6400MHz', category: 'ram', type: 'DDR5', cost: 249, score: 1600 },
     'ram_dominator_d5': { name: 'Corsair Dominator Titanium 32GB DDR5 7200MHz', category: 'ram', type: 'DDR5', cost: 199, score: 1450 },
     'ram_fury_d5': { name: 'Kingston Fury Beast 32GB DDR5 5600MHz', category: 'ram', type: 'DDR5', cost: 119, score: 1100 },
     
-    // ── SATA SSDs ──
+    //  SATA SSDs 
     'ssd_mx500_500': { name: 'Crucial MX500 500GB SATA SSD', category: 'ssd', cost: 49, score: 400 },
     'ssd_870evo_1tb': { name: 'Samsung 870 EVO 1TB SATA SSD', category: 'ssd', cost: 89, score: 550 },
     'ssd_870evo_2tb': { name: 'Samsung 870 EVO 2TB SATA SSD', category: 'ssd', cost: 149, score: 650 },
-    // ── Gen3 NVMe ──
+    //  Gen3 NVMe 
     'ssd_sn770_1tb': { name: 'WD Blue SN570 1TB NVMe Gen3 M.2', category: 'ssd', cost: 69, score: 750 },
     'ssd_970evo_1tb': { name: 'Samsung 970 EVO Plus 1TB NVMe Gen3', category: 'ssd', cost: 99, score: 850 },
-    // ── Gen4 NVMe ──
+    //  Gen4 NVMe 
     'ssd_crucial_1tb': { name: 'Crucial P3 Plus 1TB Gen4 M.2', category: 'ssd', cost: 79, score: 950 },
     'ssd_990pro_1tb': { name: 'Samsung 990 Pro 1TB NVMe Gen4 M.2', category: 'ssd', cost: 119, score: 1200 },
     'ssd_990pro_2tb': { name: 'Samsung 990 Pro 2TB NVMe Gen4 M.2', category: 'ssd', cost: 189, score: 1350 },
     'ssd_850x_2tb': { name: 'WD Black SN850X 2TB NVMe Gen4 M.2', category: 'ssd', cost: 209, score: 1500 },
     'ssd_sn850x_4tb': { name: 'WD Black SN850X 4TB NVMe Gen4 M.2', category: 'ssd', cost: 349, score: 1650 },
-    // ── Gen5 NVMe ──
+    //  Gen5 NVMe 
     'ssd_t705_1tb': { name: 'Crucial T705 1TB NVMe Gen5 M.2', category: 'ssd', cost: 179, score: 1800 },
     'ssd_t705_2tb': { name: 'Crucial T705 2TB NVMe Gen5 M.2', category: 'ssd', cost: 299, score: 2000 },
     'ssd_990pro5_2tb': { name: 'Samsung 9100 Pro 2TB NVMe Gen5 M.2', category: 'ssd', cost: 329, score: 2200 },
@@ -146,7 +146,7 @@ const database = [
     { q: "What is the purpose of a power supply unit (PSU)?", a: ["Converts AC wall power to DC power for PC components.", "Controls fan speeds.", "Regulates GPU clock speeds."], c: 0, topic: "General" },
     { q: "What does 'form factor' mean for a PC case?", a: ["The size and shape standard that determines compatible components.", "The number of fans it can hold.", "The material the case is made from."], c: 0, topic: "General" },
 
-    // ── CPUs (extended) ──
+    //  CPUs (extended) 
     { q: "What does 'hyperthreading' or SMT allow a CPU to do?", a: ["Run two threads per physical core simultaneously.", "Double the clock speed of each core.", "Share cache between two CPUs."], c: 0, topic: "CPUs" },
     { q: "What is the purpose of the CPU's L1 cache?", a: ["Store the most frequently used data at the fastest possible speed.", "Hold the operating system kernel.", "Buffer GPU frame output."], c: 0, topic: "CPUs" },
     { q: "What does 'IPC' stand for in CPU performance?", a: ["Instructions Per Clock.", "Integrated Power Core.", "Internal Processing Cache."], c: 0, topic: "CPUs" },
@@ -155,7 +155,7 @@ const database = [
     { q: "What is 'boost clock' on a modern CPU?", a: ["The maximum speed the CPU can briefly reach under load.", "The guaranteed minimum speed at all times.", "The speed during idle mode."], c: 0, topic: "CPUs" },
     { q: "What manufacturing process node does a smaller nm value represent?", a: ["A more efficient and denser chip design.", "A larger and faster chip.", "A chip with more cache."], c: 0, topic: "CPUs" },
 
-    // ── GPUs (extended) ──
+    //  GPUs (extended) 
     { q: "What does DLSS stand for in NVIDIA technology?", a: ["Deep Learning Super Sampling.", "Direct Lighting Shader System.", "Dynamic Level Scaling System."], c: 0, topic: "GPUs" },
     { q: "What is AMD's equivalent to NVIDIA DLSS called?", a: ["FSR (FidelityFX Super Resolution).", "RSR (Radeon Super Render).", "XeSS (Xe Super Sampling).", ], c: 0, topic: "GPUs" },
     { q: "What does more VRAM on a GPU allow?", a: ["Handling higher resolution textures and more complex scenes.", "Faster CPU-GPU communication.", "Lower power draw."], c: 0, topic: "GPUs" },
@@ -165,21 +165,21 @@ const database = [
     { q: "What does a GPU's TDP rating tell you?", a: ["How much power the GPU consumes under full load.", "Its maximum frame rate.", "Its warranty period."], c: 0, topic: "GPUs" },
     { q: "What does 'rasterization' mean in GPU rendering?", a: ["Converting 3D geometry into 2D pixels on screen.", "Simulating realistic light ray bouncing.", "Compressing texture files for faster loading."], c: 0, topic: "GPUs" },
 
-    // ── RAM (extended) ──
+    //  RAM (extended) 
     { q: "What does CAS latency (CL) measure in RAM?", a: ["The delay in clock cycles between a command and the data being available.", "The voltage required by the RAM module.", "The maximum temperature the RAM can reach."], c: 0, topic: "RAM" },
     { q: "What does XMP or EXPO do for RAM?", a: ["Automatically sets RAM to its rated advertised speed.", "Reduces RAM voltage for efficiency.", "Enables ECC error correction."], c: 0, topic: "RAM" },
     { q: "Why is it better to install RAM in matched pairs?", a: ["To enable dual-channel mode for higher bandwidth.", "To reduce heat output.", "To double the voltage."], c: 0, topic: "RAM" },
     { q: "What is ECC RAM primarily used for?", a: ["Servers and workstations that require error correction.", "High-speed gaming PCs.", "Budget office computers."], c: 0, topic: "RAM" },
     { q: "What happens to RAM data when the PC is powered off?", a: ["All data is lost since RAM is volatile memory.", "Data is saved automatically to the SSD.", "Data is stored in the CPU cache."], c: 0, topic: "RAM" },
 
-    // ── Storage (extended) ──
+    //  Storage (extended) 
     { q: "What is the typical read speed of a modern Gen4 NVMe SSD?", a: ["Up to 7,000 MB/s.", "Up to 550 MB/s.", "Up to 200 MB/s."], c: 0, topic: "Storage" },
     { q: "What does SATA stand for?", a: ["Serial Advanced Technology Attachment.", "Solid Access Transfer Architecture.", "Sequential Array Transfer Access."], c: 0, topic: "Storage" },
     { q: "What is the maximum SATA SSD read speed approximately?", a: ["~550 MB/s.", "~7000 MB/s.", "~3500 MB/s."], c: 0, topic: "Storage" },
     { q: "What does 'TBW' mean on an SSD?", a: ["Terabytes Written — the total data that can be written before wear.", "Total Bandwidth Width.", "Transfer Buffer Width."], c: 0, topic: "Storage" },
     { q: "What form factor do most modern fast SSDs use?", a: ["M.2 (2280).", "2.5 inch.", "3.5 inch."], c: 0, topic: "Storage" },
 
-    // ── Displays (extended) ──
+    //  Displays (extended) 
     { q: "What does 'response time' mean on a monitor?", a: ["How quickly a pixel can change from one colour to another.", "How fast the monitor turns on from standby.", "The delay between input and on-screen action."], c: 0, topic: "Displays" },
     { q: "What is input lag on a monitor?", a: ["The delay between a signal being sent and appearing on screen.", "The time to change pixel brightness.", "The refresh rate divided by frames per second."], c: 0, topic: "Displays" },
     { q: "What does G-Sync and FreeSync do?", a: ["Synchronise the monitor refresh rate with the GPU frame rate to eliminate tearing.", "Boost the monitor's peak brightness automatically.", "Control the monitor's colour temperature."], c: 0, topic: "Displays" },
@@ -187,13 +187,13 @@ const database = [
     { q: "Which panel type generally has the fastest response time for gaming?", a: ["TN (Twisted Nematic).", "IPS (In-Plane Switching).", "VA (Vertical Alignment)."], c: 0, topic: "Displays" },
     { q: "What is 'nits' a measurement of on a monitor?", a: ["Brightness/luminance output.", "Colour accuracy.", "Pixel density."], c: 0, topic: "Displays" },
 
-    // ── Cooling (extended) ──
+    //  Cooling (extended) 
     { q: "What is the advantage of liquid cooling over air cooling?", a: ["Better heat dissipation for high TDP CPUs with less case clearance needed.", "Lower noise at all times.", "Cheaper overall cost."], c: 0, topic: "Cooling" },
     { q: "What does 'TIM' stand for in CPU cooling?", a: ["Thermal Interface Material (thermal paste).", "Thermal Intake Module.", "Temperature Indicator Metric."], c: 0, topic: "Cooling" },
     { q: "What is a heat pipe used for in air coolers?", a: ["Transfer heat away from the CPU base to the fin stack efficiently.", "Pump liquid coolant through the loop.", "Regulate fan speed automatically."], c: 0, topic: "Cooling" },
     { q: "What RPM range do most case fans operate at?", a: ["500–2000 RPM.", "5000–10000 RPM.", "100–300 RPM."], c: 0, topic: "Cooling" },
 
-    // ── General (extended) ──
+    //  General (extended) 
     { q: "What does ATX stand for in motherboard form factors?", a: ["Advanced Technology eXtended.", "Automatic Thermal eXchange.", "Active Transfer eXtension."], c: 0, topic: "General" },
     { q: "What is a chipset on a motherboard?", a: ["A chip that manages data flow between the CPU, RAM, and peripherals.", "A dedicated GPU on the motherboard.", "A secondary CPU for background tasks."], c: 0, topic: "General" },
     { q: "What does 'modular PSU' mean?", a: ["You can detach unused cables to reduce clutter.", "The PSU has multiple voltage rails.", "The PSU supports automatic wattage scaling."], c: 0, topic: "General" },
@@ -208,7 +208,7 @@ let currentQuestionIdx = 0;
 let selectedQuizAnswer = null;
 let quizEvaluated = false;
 
-// ── SUPABASE INIT (Ver 1.5.2a Tetonic) ──────────────────────────────────────
+//  SUPABASE INIT (Ver 1.8.9a Pulsar) 
 const SUPABASE_URL = "https://hkuwkajmgieptgotgmuc.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhrdXdrYWptZ2llcHRnb3RnbXVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyMjE2NjksImV4cCI6MjA5Njc5NzY2OX0.GJhJAE5WlRDNxO9BprFewK75lir4cHnJ_0W-v246-SQ";
 const { createClient } = supabase;
@@ -327,7 +327,7 @@ function renderProfilesTray() {
     if (userKeys.length > 0) {
         tray.style.display = 'block';
         userKeys.forEach(username => {
-            container.innerHTML += '<button class="profile-badge-btn" onclick="selectUserField(\'' + username + '\')">👤 ' + username + '</button>';
+            container.innerHTML += '<button class="profile-badge-btn" onclick="selectUserField(\'' + username + '\')"> ' + username + '</button>';
         });
     } else { tray.style.display = 'none'; }
 }
@@ -375,7 +375,7 @@ function applyUserProfile(username) {
     document.getElementById('auth-box').style.display = 'none';
     document.getElementById('main-game-workspace').style.display = 'block';
     document.getElementById('hud-user').innerText = username;
-    renderShop(); loadNextQuestion(); updateHUD(); renderProfilesTray(); resetBenchmarkDisplay(); renderAdminPanel();
+    renderShop(); loadNextQuestion(); updateHUD(); renderProfilesTray(); resetBenchmarkDisplay(); renderAdminPanel(); updateOnlinePresence(); setInterval(updateOnlinePresence, 60000);
 }
 
 async function accountLogout() {
@@ -491,19 +491,19 @@ function purchasePrebuilt(tier) {
         currentUser.builds++;
         currentUser.points += bonus;
         
-        logWorkshop("⚡ LAZY-BUY: Purchased " + tier.toUpperCase() + " Pre-built rig for $" + cost + " CAD! Contract reward processing: +$" + bonus + " CAD injected.");
+        logWorkshop(" LAZY-BUY: Purchased " + tier.toUpperCase() + " Pre-built rig for $" + cost + " CAD! Contract reward processing: +$" + bonus + " CAD injected.");
         
         if (currentUser.builds === 1) {
             currentUser.points += 500;
-            logWorkshop("🎁 GRAND OPENING PRIZE: Handed +$500 CAD Cash Prize for shipping your first machine!");
+            logWorkshop(" GRAND OPENING PRIZE: Handed +$500 CAD Cash Prize for shipping your first machine!");
         } else if (currentUser.builds % 3 === 0) {
             currentUser.points += 1000;
-            logWorkshop("🏆 PRODUCTION MULTIPLIER HIT: Issued +$1,000 CAD Production Bonus Grant!");
+            logWorkshop(" PRODUCTION MULTIPLIER HIT: Issued +$1,000 CAD Production Bonus Grant!");
         }
 
         saveAccountsToDisk();
         updateHUD();
-        alert("⚡ Pre-Built Deployed! Total cost: $" + cost + " CAD. Payout gained: +$" + bonus + " CAD!");
+        alert(" Pre-Built Deployed! Total cost: $" + cost + " CAD. Payout gained: +$" + bonus + " CAD!");
     }
 }
 
@@ -536,7 +536,7 @@ function executeBenchmarkSweep() {
     }
 
     if (!cpuKey || !gpuKey || !ramKey || !ssdKey || !coolerKey || !displayKey || !isCompatible) {
-        document.getElementById('bench-console-text').innerHTML = "<span style='color:#f87171;'>❌ ENGINE ERROR: Benchmarking suite aborted. You must configure a fully occupied, error-free component setup in the assembly bay fields below before booting benchmarks!</span>";
+        document.getElementById('bench-console-text').innerHTML = "<span style='color:#f87171;'> ENGINE ERROR: Benchmarking suite aborted. You must configure a fully occupied, error-free component setup in the assembly bay fields below before booting benchmarks!</span>";
         return;
     }
 
@@ -584,15 +584,15 @@ function executeBenchmarkSweep() {
             if (testSuite === "timespy") {
                 finalGpuScore = Math.floor(rawGpu * 1.05 + (secondaryBonus * 0.1));
                 finalCpuScore = Math.floor(rawCpu * 0.9);
-                consoleText.innerHTML = "✨ <strong>3DMark Sweep Completed!</strong> Highly optimal results logged. Direct 3D shader compute capacity maximized.";
+                consoleText.innerHTML = " <strong>3DMark Sweep Completed!</strong> Highly optimal results logged. Direct 3D shader compute capacity maximized.";
             } else if (testSuite === "cinebench") {
                 finalGpuScore = Math.floor(rawGpu * 0.3);
                 finalCpuScore = Math.floor(rawCpu * 1.4 + (secondaryBonus * 0.15));
-                consoleText.innerHTML = "✨ <strong>Cinebench Multi-Thread Burn Complete!</strong> CPU architecture pushed to raw limits. Rendering passes finished.";
+                consoleText.innerHTML = " <strong>Cinebench Multi-Thread Burn Complete!</strong> CPU architecture pushed to raw limits. Rendering passes finished.";
             } else if (testSuite === "cyberpunk") {
                 finalGpuScore = Math.floor(rawGpu * 1.35);
                 finalCpuScore = Math.floor(rawCpu * 0.95);
-                consoleText.innerHTML = "✨ <strong>Cyberpunk RT Overdrive Simulation Stable!</strong> Trace hierarchies processed successfully.";
+                consoleText.innerHTML = " <strong>Cyberpunk RT Overdrive Simulation Stable!</strong> Trace hierarchies processed successfully.";
             }
 
             // Display values inside the lab console dashboard boxes
@@ -605,10 +605,11 @@ function executeBenchmarkSweep() {
             
             // Inject Gold Mine payout funds directly into user profile bank account balance
             gameState.users[gameState.activeUser].points += goldMineYield;
+            const bu = gameState.users[gameState.activeUser]; bu.benchmarks = (bu.benchmarks||0)+1;
             saveAccountsToDisk();
             updateHUD();
 
-            logWorkshop("📊 BENCHMARK BONUS: Profile executed hardware sweep. Gold mine algorithm converted performance to +$" + goldMineYield + " CAD!");
+            logWorkshop(" BENCHMARK BONUS: Profile executed hardware sweep. Gold mine algorithm converted performance to +$" + goldMineYield + " CAD!");
         }
     }, 250);
 }
@@ -642,12 +643,14 @@ function handleQuizAction() {
         const btns = document.getElementById('options-container').getElementsByClassName('option-btn');
         if (selectedQuizAnswer === qData.c) {
             btns[selectedQuizAnswer].classList.add('correct');
-            feedback.innerHTML = "🎉 Correct! +$500 CAD."; feedback.style.color = "#4ade80";
+            feedback.innerHTML = " Correct! +$500 CAD."; feedback.style.color = "#4ade80";
             gameState.users[gameState.activeUser].points += 500;
+            const qu = gameState.users[gameState.activeUser];
+            qu.correct = (qu.correct || 0) + 1;
             saveAccountsToDisk(); updateHUD();
         } else {
             btns[selectedQuizAnswer].classList.add('incorrect'); btns[qData.c].classList.add('correct');
-            feedback.innerHTML = "❌ Architectural mismatch!"; feedback.style.color = "#ef4444";
+            feedback.innerHTML = " Architectural mismatch!"; feedback.style.color = "#ef4444";
         }
         btn.innerText = "Next Challenge";
     } else { loadNextQuestion(); }
@@ -703,11 +706,11 @@ function syncRigVisuals() {
         
         if (selectedCpu.type === 'AM5' && selectedRam.type === 'DDR4') {
             isCompatible = false;
-            errorMsg = "⚠️ ARCHITECTURAL CONFLICT: AMD AM5 Processors strictly reject DDR4 configurations! Match with a DDR5 Memory kit.";
+            errorMsg = " ARCHITECTURAL CONFLICT: AMD AM5 Processors strictly reject DDR4 configurations! Match with a DDR5 Memory kit.";
         }
         else if (selectedCpu.type === 'AM4' && selectedRam.type === 'DDR5') {
             isCompatible = false;
-            errorMsg = "⚠️ GEN ARCHITECTURAL CONFLICT: Legacy AMD AM4 sockets cannot execute on DDR5 architecture lines! Remount using a DDR4 memory stick.";
+            errorMsg = " GEN ARCHITECTURAL CONFLICT: Legacy AMD AM4 sockets cannot execute on DDR5 architecture lines! Remount using a DDR4 memory stick.";
         }
     }
 
@@ -718,22 +721,22 @@ function syncRigVisuals() {
         alertBanner.style.display = 'none';
     }
 
-    document.getElementById('vis-node-cpu').innerHTML = cpuKey ? "💾 CPU: CONNECTED" : "💾 CPU Slot: EMPTY";
-    document.getElementById('vis-node-gpu').innerHTML = gpuKey ? "🎮 GPU: ACTIVE" : "🎮 GPU Slot: EMPTY";
-    document.getElementById('vis-node-ram').innerHTML = ramKey ? "⚡ RAM: ARMED" : "⚡ RAM Slot: EMPTY";
-    document.getElementById('vis-node-ssd').innerHTML = ssdKey ? "🗂️ SSD: MOUNTED" : "🗂️ Storage: EMPTY";
+    document.getElementById('vis-node-cpu').innerHTML = cpuKey ? " CPU: CONNECTED" : " CPU Slot: EMPTY";
+    document.getElementById('vis-node-gpu').innerHTML = gpuKey ? " GPU: ACTIVE" : " GPU Slot: EMPTY";
+    document.getElementById('vis-node-ram').innerHTML = ramKey ? " RAM: ARMED" : " RAM Slot: EMPTY";
+    document.getElementById('vis-node-ssd').innerHTML = ssdKey ? " SSD: MOUNTED" : " Storage: EMPTY";
 
     const screen = document.getElementById('vis-monitor-screen');
     if (displayKey) {
         if (cpuKey && gpuKey && ramKey && ssdKey && coolerKey && isCompatible) {
-            screen.innerHTML = "🖥️ SYSTEM BOOT SUCCESS!<br><span style='font-size:7pt; color:#eab308;'>[POST Verification Passed]</span>";
+            screen.innerHTML = " SYSTEM BOOT SUCCESS!<br><span style='font-size:7pt; color:#eab308;'>[POST Verification Passed]</span>";
         } else if (!isCompatible) {
-            screen.innerHTML = "❌ BOOT MALFUNCTION<br><span style='font-size:7pt; color:#ef4444;'>[Socket Matrix Error]</span>";
+            screen.innerHTML = " BOOT MALFUNCTION<br><span style='font-size:7pt; color:#ef4444;'>[Socket Matrix Error]</span>";
         } else {
-            screen.innerHTML = "⚠️ NO POST SIGNAL<br><span style='font-size:7pt; color:#94a3b8;'>[Wiring Incomplete]</span>";
+            screen.innerHTML = " NO POST SIGNAL<br><span style='font-size:7pt; color:#94a3b8;'>[Wiring Incomplete]</span>";
         }
     } else {
-        screen.innerHTML = "🖥️ NO DISPLAY SIGNAL";
+        screen.innerHTML = " NO DISPLAY SIGNAL";
     }
 
     document.getElementById('assemble-action-btn').disabled = !(cpuKey && gpuKey && ramKey && ssdKey && coolerKey && displayKey && isCompatible);
@@ -751,35 +754,35 @@ function triggerSystemAssembly() {
         currentUser.inventory[ssd]--; currentUser.inventory[cooler]--; currentUser.inventory[display]--;
         
         currentUser.builds++;
-        logWorkshop("✨ Rig compiled and deployed successfully!");
+        logWorkshop(" Rig compiled and deployed successfully!");
 
         if (cpu === 'cpu_7600x' && gpu === 'nv_3060') {
             currentUser.points += 750;
-            logWorkshop("🎯 BUDGET BONUS: Fulfilled Ryzen 5 7600X + RTX 3060 configuration! Earned +$750 CAD.");
-            alert("🎯 Objective Fulfilled! Budget category rig distributed. Wired +$750 CAD bonus!");
+            logWorkshop(" BUDGET BONUS: Fulfilled Ryzen 5 7600X + RTX 3060 configuration! Earned +$750 CAD.");
+            alert(" Objective Fulfilled! Budget category rig distributed. Wired +$750 CAD bonus!");
         }
         
         if (cpu === 'cpu_7800x3d' && gpu === 'amd_7900xt') {
             currentUser.points += 1250;
-            logWorkshop("🎯 MID-RANGE BONUS: Fulfilled Ryzen 7 7800X3D + RX 7900 XT configuration! Earned +$1,250 CAD.");
-            alert("🎯 Objective Fulfilled! Mid-Range performance category rig distributed. Wired +$1,250 CAD bonus!");
+            logWorkshop(" MID-RANGE BONUS: Fulfilled Ryzen 7 7800X3D + RX 7900 XT configuration! Earned +$1,250 CAD.");
+            alert(" Objective Fulfilled! Mid-Range performance category rig distributed. Wired +$1,250 CAD bonus!");
         }
 
         if (cpu === 'cpu_9850x3d' && (gpu === 'nv_5070ti' || gpu === 'nv_5080')) {
             currentUser.points += 2200;
-            logWorkshop("🎯 ENTHUSIAST BONUS: Fulfilled Ryzen 7 9850X3D + " + catalog[gpu].name.split(' (')[0] + " configuration! Earned +$2,200 CAD.");
-            alert("🎯 Objective Fulfilled! Next-Gen Enthusiast category rig distributed. Wired +$2,200 CAD bonus!");
+            logWorkshop(" ENTHUSIAST BONUS: Fulfilled Ryzen 7 9850X3D + " + catalog[gpu].name.split(' (')[0] + " configuration! Earned +$2,200 CAD.");
+            alert(" Objective Fulfilled! Next-Gen Enthusiast category rig distributed. Wired +$2,200 CAD bonus!");
         }
 
         if (currentUser.builds === 1) {
             currentUser.points += 500;
-            logWorkshop("🎁 GRAND OPENING PRIZE: Handed +$500 CAD Cash Prize for shipping your first machine!");
-            alert("🎉 First Build Milestone Completed! The hardware firm has wired you a bonus +$500 CAD prize!");
+            logWorkshop(" GRAND OPENING PRIZE: Handed +$500 CAD Cash Prize for shipping your first machine!");
+            alert(" First Build Milestone Completed! The hardware firm has wired you a bonus +$500 CAD prize!");
         } 
         else if (currentUser.builds % 3 === 0) {
             currentUser.points += 1000;
-            logWorkshop("🏆 PRODUCTION MULTIPLIER HIT: Issued +$1,000 CAD Production Bonus Grant!");
-            alert("🏆 Milestone Achieved! You reached " + currentUser.builds + " built systems. Enjoy your +$1,000 CAD management grant!");
+            logWorkshop(" PRODUCTION MULTIPLIER HIT: Issued +$1,000 CAD Production Bonus Grant!");
+            alert(" Milestone Achieved! You reached " + currentUser.builds + " built systems. Enjoy your +$1,000 CAD management grant!");
         }
         
         saveAccountsToDisk();
@@ -795,7 +798,7 @@ function logWorkshop(message) {
     output.innerHTML += "<br>> " + message; output.scrollTop = output.scrollHeight;
 }
 
-// ── VER 1.3.10 YOSEMITE: MZX ADMIN PANEL ────────────────────────────────────
+//  VER 1.3.10 YOSEMITE: MZX ADMIN PANEL 
 
 async function renderAdminPanel() {
     const panel = document.getElementById('mzx-admin-panel');
@@ -809,7 +812,7 @@ async function renderAdminPanel() {
     }
 
     panel.style.display = 'block';
-    grid.innerHTML = '<div style="color:#94a3b8; font-size:9pt; padding:10px;">🔄 Loading accounts...</div>';
+    grid.innerHTML = '<div style="color:#94a3b8; font-size:9pt; padding:10px;"> Loading accounts...</div>';
 
     // Always pull fresh from Supabase
     try {
@@ -843,14 +846,14 @@ async function renderAdminPanel() {
             <div style="background:${cardColor}; border:1px solid ${borderColor}; border-radius:8px; padding:14px;">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                     <span style="font-weight:900; font-size:10pt; color:${isSelf ? '#f87171' : '#f8fafc'};">
-                        👤 ${username}${isSelf ? ' <span style="font-size:7pt; color:#ef4444;">[ADMIN]</span>' : ''}
+                         ${username}${isSelf ? ' <span style="font-size:7pt; color:#ef4444;">[ADMIN]</span>' : ''}
                     </span>
                     <span style="font-size:8.5pt; color:#4ade80; font-family:monospace; font-weight:bold;">
                         $${user.points.toLocaleString()} CAD
                     </span>
                 </div>
                 <div style="font-size:8pt; color:#94a3b8; margin-bottom:10px;">
-                    Builds: ${user.builds} &nbsp;|&nbsp; Parts: ${Object.values(user.inventory).reduce((a,b)=>a+b,0)}
+                     Password: ${user.password} &nbsp;|&nbsp; Builds: ${user.builds} &nbsp;|&nbsp; Parts: ${Object.values(user.inventory).reduce((a,b)=>a+b,0)}
                 </div>
                 <div style="display:flex; gap:6px; align-items:center;">
                     <input
@@ -865,12 +868,12 @@ async function renderAdminPanel() {
                     <button
                         onclick="adminAdjustFunds('${username}', 'add')"
                         style="flex:1; background:#22c55e; border:none; border-bottom:3px solid #16a34a; color:white; padding:7px; font-weight:bold; border-radius:6px; cursor:pointer; font-size:8.5pt;">
-                        ＋ Add
+                         Add
                     </button>
                     <button
                         onclick="adminAdjustFunds('${username}', 'deduct')"
                         style="flex:1; background:#ef4444; border:none; border-bottom:3px solid #b91c1c; color:white; padding:7px; font-weight:bold; border-radius:6px; cursor:pointer; font-size:8.5pt;">
-                        － Deduct
+                         Deduct
                     </button>
                 </div>
             </div>`;
@@ -882,7 +885,7 @@ async function adminAdjustFunds(username, action) {
     const amount = parseInt(input.value);
 
     if (!input.value || isNaN(amount) || amount <= 0) {
-        alert('⚠️ Enter a valid positive amount first.');
+        alert(' Enter a valid positive amount first.');
         return;
     }
 
@@ -891,13 +894,13 @@ async function adminAdjustFunds(username, action) {
 
     if (action === 'add') {
         user.points += amount;
-        alert('✅ Added $' + amount.toLocaleString() + ' CAD to ' + username + '\'s account.\nNew balance: $' + user.points.toLocaleString() + ' CAD');
+        alert(' Added $' + amount.toLocaleString() + ' CAD to ' + username + '\'s account.\nNew balance: $' + user.points.toLocaleString() + ' CAD');
     } else {
         if (user.points - amount < 0) {
-            if (!confirm('⚠️ This will put ' + username + ' into a negative balance ($' + (user.points - amount).toLocaleString() + ' CAD). Continue?')) return;
+            if (!confirm(' This will put ' + username + ' into a negative balance ($' + (user.points - amount).toLocaleString() + ' CAD). Continue?')) return;
         }
         user.points -= amount;
-        alert('✅ Deducted $' + amount.toLocaleString() + ' CAD from ' + username + '\'s account.\nNew balance: $' + user.points.toLocaleString() + ' CAD');
+        alert(' Deducted $' + amount.toLocaleString() + ' CAD from ' + username + '\'s account.\nNew balance: $' + user.points.toLocaleString() + ' CAD');
     }
 
     input.value = '';
@@ -917,7 +920,7 @@ async function adminAdjustFunds(username, action) {
     renderAdminPanel();
 }
 
-// ── STUDY GUIDE + PAGE SWITCHING (Ver 1.5.2a Tetonic) ─────────────────────────
+//  STUDY GUIDE + PAGE SWITCHING (Ver 1.8.9a Pulsar) 
 
 let currentStudyTopic = 'all';
 
@@ -982,4 +985,200 @@ function hexToRgb(hex) {
     const map = { '#f59e0b':'245,158,11', '#a855f7':'168,85,247', '#0ea5e9':'14,165,233',
                   '#22c55e':'34,197,94', '#38bdf8':'56,189,248', '#06b6d4':'6,182,212', '#94a3b8':'148,163,184' };
     return map[hex] || '148,163,184';
+}
+
+// 
+// COMMUNITY + ACHIEVEMENTS (Ver 1.8.9a Pulsar)
+// 
+
+//  ACHIEVEMENTS DEFINITION 
+const ACHIEVEMENTS = [
+    { id: 'first_login',    icon: '', name: 'Welcome!',          desc: 'Log in for the first time.',                       check: (u) => true },
+    { id: 'first_purchase', icon: '', name: 'First Buy',         desc: 'Purchase your first component.',                   check: (u) => Object.values(u.inventory).reduce((a,b)=>a+b,0) >= 1 },
+    { id: 'first_build',    icon: '', name: 'Builder',           desc: 'Assemble your first PC.',                          check: (u) => u.builds >= 1 },
+    { id: 'build_5',        icon: '', name: 'Workshop Pro',      desc: 'Assemble 5 PCs.',                                  check: (u) => u.builds >= 5 },
+    { id: 'build_10',       icon: '', name: 'Factory Floor',     desc: 'Assemble 10 PCs.',                                 check: (u) => u.builds >= 10 },
+    { id: 'broke',          icon: '', name: 'Broke',             desc: 'Spend down to under $100 CAD.',                    check: (u) => u.points < 100 },
+    { id: 'rich_1k',        icon: '', name: 'Getting Rich',      desc: 'Have $10,000 CAD in your account.',                check: (u) => u.points >= 10000 },
+    { id: 'rich_50k',       icon: '', name: 'Tycoon',            desc: 'Have $50,000 CAD in your account.',                check: (u) => u.points >= 50000 },
+    { id: 'rich_100k',      icon: '', name: 'Hardware Mogul',    desc: 'Have $100,000 CAD in your account.',               check: (u) => u.points >= 100000 },
+    { id: 'parts_10',       icon: '', name: 'Hoarder',           desc: 'Own 10 or more parts in total.',                   check: (u) => Object.values(u.inventory).reduce((a,b)=>a+b,0) >= 10 },
+    { id: 'parts_25',       icon: '', name: 'Warehouse',         desc: 'Own 25 or more parts in total.',                   check: (u) => Object.values(u.inventory).reduce((a,b)=>a+b,0) >= 25 },
+    { id: 'benchmark',      icon: '', name: 'Benchmarker',       desc: 'Run your first benchmark.',                        check: (u) => (u.benchmarks || 0) >= 1 },
+    { id: 'benchmark_10',   icon: '', name: 'Stress Tester',     desc: 'Run 10 benchmarks.',                               check: (u) => (u.benchmarks || 0) >= 10 },
+    { id: 'quiz_correct',   icon: '', name: 'Brain',             desc: 'Answer your first quiz question correctly.',       check: (u) => (u.correct || 0) >= 1 },
+    { id: 'quiz_10',        icon: '', name: 'Student',           desc: 'Answer 10 quiz questions correctly.',              check: (u) => (u.correct || 0) >= 10 },
+    { id: 'quiz_50',        icon: '', name: 'Hardware Scholar',  desc: 'Answer 50 quiz questions correctly.',              check: (u) => (u.correct || 0) >= 50 },
+    { id: 'gtx_1080ti',     icon: '', name: 'Titan Owner',       desc: 'Own a GTX 1080 Ti.',                               check: (u) => (u.inventory['nv_gtx1080ti'] || 0) >= 1 },
+    { id: 'rtx_5090',       icon: '', name: 'Blackwell Beast',   desc: 'Own an RTX 5090.',                                 check: (u) => (u.inventory['nv_5090'] || 0) >= 1 },
+    { id: 'all_nvidia',     icon: '', name: 'Team Green',        desc: 'Own at least one of every NVIDIA RTX 5000 GPU.',   check: (u) => ['nv_5060','nv_5070','nv_5070ti','nv_5080','nv_5090'].every(k => (u.inventory[k]||0)>=1) },
+    { id: 'chat_msg',       icon: '', name: 'Social',            desc: 'Send your first chat message.',                    check: (u) => (u.chatMessages || 0) >= 1 },
+];
+
+function renderAchievements() {
+    const grid = document.getElementById('achievements-grid');
+    if (!grid || !gameState.activeUser) return;
+    const user = gameState.users[gameState.activeUser];
+    grid.innerHTML = ACHIEVEMENTS.map(function(a) {
+        const unlocked = a.check(user);
+        return '<div style="background:' + (unlocked ? 'rgba(234,179,8,0.08)' : 'rgba(15,23,42,0.4)') + '; border:1px solid ' + (unlocked ? '#eab308' : '#1e293b') + '; border-radius:10px; padding:14px; display:flex; gap:12px; align-items:center; opacity:' + (unlocked ? '1' : '0.45') + ';">' +
+            '<div style="font-size:26pt; line-height:1;">' + a.icon + '</div>' +
+            '<div>' +
+                '<div style="font-weight:900; font-size:9.5pt; color:' + (unlocked ? '#eab308' : '#94a3b8') + ';">' + a.name + (unlocked ? ' ' : ' ') + '</div>' +
+                '<div style="font-size:8pt; color:#64748b; margin-top:2px;">' + a.desc + '</div>' +
+            '</div>' +
+        '</div>';
+    }).join('');
+}
+
+//  ONLINE PRESENCE 
+async function updateOnlinePresence() {
+    if (!gameState.activeUser) return;
+    try {
+        await db.from('online_players').upsert({
+            username: gameState.activeUser,
+            last_seen: new Date().toISOString(),
+            points: gameState.users[gameState.activeUser].points,
+            builds: gameState.users[gameState.activeUser].builds
+        }, { onConflict: 'username' });
+    } catch(e) {}
+}
+
+async function renderOnlinePlayers() {
+    const el = document.getElementById('online-players-list');
+    if (!el) return;
+    try {
+        const cutoff = new Date(Date.now() - 5 * 60 * 1000).toISOString(); // 5 min
+        const { data } = await db.from('online_players').select('*').gte('last_seen', cutoff).order('last_seen', { ascending: false });
+        if (!data || data.length === 0) {
+            el.innerHTML = '<div style="color:#475569; font-size:8.5pt;">No players online right now.</div>';
+            return;
+        }
+        el.innerHTML = data.map(function(p) {
+            const isMe = p.username === gameState.activeUser;
+            return '<div style="display:flex; justify-content:space-between; align-items:center; background:rgba(14,165,233,0.07); border:1px solid rgba(14,165,233,0.15); border-radius:6px; padding:8px 12px;">' +
+                '<span style="font-size:9pt; font-weight:700; color:' + (isMe ? '#38bdf8' : '#f8fafc') + ';"> ' + p.username + (isMe ? ' (you)' : '') + '</span>' +
+                '<span style="font-size:8pt; color:#94a3b8;">$' + (p.points||0).toLocaleString() + '</span>' +
+            '</div>';
+        }).join('');
+    } catch(e) {
+        el.innerHTML = '<div style="color:#475569; font-size:8.5pt;">Could not load players.</div>';
+    }
+}
+
+//  BUILD RATINGS 
+function getBuildRating(points) {
+    if (points >= 35000) return { label: ' Enthusiast', color: '#eab308' };
+    if (points >= 20000) return { label: ' High-End', color: '#f97316' };
+    if (points >= 12000) return { label: ' Mid-Range', color: '#0ea5e9' };
+    if (points >= 6000)  return { label: ' Budget',    color: '#22c55e' };
+    return                      { label: ' Entry',     color: '#94a3b8' };
+}
+
+async function renderBuildRatings() {
+    const el = document.getElementById('build-ratings-list');
+    if (!el) return;
+    try {
+        const { data } = await db.from('users').select('username, points, builds').order('builds', { ascending: false }).limit(10);
+        if (!data || data.length === 0) {
+            el.innerHTML = '<div style="color:#475569; font-size:8.5pt;">No builds yet.</div>';
+            return;
+        }
+        el.innerHTML = data.filter(function(u) { return u.builds > 0; }).map(function(u, i) {
+            const rating = getBuildRating(u.points);
+            return '<div style="display:flex; justify-content:space-between; align-items:center; background:rgba(168,85,247,0.07); border:1px solid rgba(168,85,247,0.12); border-radius:6px; padding:8px 12px;">' +
+                '<span style="font-size:8.5pt; font-weight:700; color:#f8fafc;">' + (i+1) + '. ' + u.username + '</span>' +
+                '<div style="text-align:right;">' +
+                    '<div style="font-size:7.5pt; color:' + rating.color + '; font-weight:bold;">' + rating.label + '</div>' +
+                    '<div style="font-size:7pt; color:#64748b;">' + u.builds + ' build' + (u.builds!==1?'s':'') + '</div>' +
+                '</div>' +
+            '</div>';
+        }).join('') || '<div style="color:#475569; font-size:8.5pt;">No builds recorded yet.</div>';
+    } catch(e) {
+        el.innerHTML = '<div style="color:#475569; font-size:8.5pt;">Could not load ratings.</div>';
+    }
+}
+
+//  GLOBAL CHAT 
+let chatSubscription = null;
+
+async function loadChatMessages() {
+    const el = document.getElementById('chat-messages');
+    if (!el) return;
+    try {
+        const { data } = await db.from('chat_messages').select('*').order('created_at', { ascending: true }).limit(60);
+        renderChatMessages(data || []);
+    } catch(e) {
+        el.innerHTML = '<div style="color:#ef4444; font-size:8.5pt;">Could not load chat.</div>';
+    }
+}
+
+function renderChatMessages(messages) {
+    const el = document.getElementById('chat-messages');
+    if (!el) return;
+    if (messages.length === 0) {
+        el.innerHTML = '<div style="color:#475569; font-size:8.5pt; text-align:center;">No messages yet. Say hello! </div>';
+        return;
+    }
+    el.innerHTML = messages.map(function(m) {
+        const isMe = m.username === gameState.activeUser;
+        const time = new Date(m.created_at).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+        return '<div style="' + (isMe ? 'align-self:flex-end; text-align:right;' : '') + '">' +
+            '<span style="font-size:7.5pt; color:#475569;">' + (isMe ? '' : m.username + ' · ') + time + (isMe ? ' · you' : '') + '</span>' +
+            '<div style="background:' + (isMe ? 'rgba(14,165,233,0.2)' : 'rgba(30,41,59,0.8)') + '; border:1px solid ' + (isMe ? 'rgba(14,165,233,0.3)' : 'rgba(255,255,255,0.06)') + '; border-radius:8px; padding:8px 12px; margin-top:2px; font-size:9pt; color:#f8fafc; max-width:280px; word-break:break-word;">' +
+                escapeHtml(m.message) +
+            '</div>' +
+        '</div>';
+    }).join('');
+    el.scrollTop = el.scrollHeight;
+}
+
+function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+async function sendChatMessage() {
+    if (!gameState.activeUser) return;
+    const input = document.getElementById('chat-input');
+    const msg = input.value.trim();
+    if (!msg) return;
+    input.value = '';
+    try {
+        await db.from('chat_messages').insert({ username: gameState.activeUser, message: msg });
+        // track for achievement
+        const user = gameState.users[gameState.activeUser];
+        user.chatMessages = (user.chatMessages || 0) + 1;
+        await loadChatMessages();
+    } catch(e) { console.warn('Chat send error:', e); }
+}
+
+function subscribeToChatUpdates() {
+    if (chatSubscription) return;
+    try {
+        chatSubscription = db.channel('chat').on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'chat_messages' }, function() {
+            if (document.getElementById('page-community') && document.getElementById('page-community').style.display !== 'none') {
+                loadChatMessages();
+            }
+        }).subscribe();
+    } catch(e) {}
+}
+
+//  PAGE SWITCHING (extended) 
+const ALL_TABS = ['game', 'study', 'community', 'achievements'];
+const TAB_COLORS = { game: '#eab308', study: '#0ea5e9', community: '#22c55e', achievements: '#eab308' };
+
+function switchPage(page) {
+    ALL_TABS.forEach(function(p) {
+        const pageEl = document.getElementById('page-' + p);
+        const tabEl  = document.getElementById('page-tab-' + p);
+        if (pageEl) pageEl.style.display = (p === page) ? 'block' : 'none';
+        if (tabEl) {
+            tabEl.style.background = (p === page) ? TAB_COLORS[p] : '#1e293b';
+            tabEl.style.color      = (p === page) ? (p === 'game' || p === 'achievements' ? '#0f172a' : 'white') : '#e2e8f0';
+            tabEl.style.border     = (p === page) ? 'none' : '2px solid #475569';
+        }
+    });
+    if (page === 'study')        { currentStudyTopic = 'all'; renderStudyCards('all'); }
+    if (page === 'community')    { renderOnlinePlayers(); renderBuildRatings(); loadChatMessages(); subscribeToChatUpdates(); }
+    if (page === 'achievements') { renderAchievements(); }
 }
