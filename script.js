@@ -950,8 +950,7 @@ async function adminGrantAchievement(username) {
             streak: user.streak || 0,
             last_login: user.lastLogin || ''
         }, { onConflict: 'username' });
-        alert('Granted [' + tier.label + '] ' + ach.name + ' to ' + username + '.
-+$' + tier.reward.toLocaleString() + ' CAD awarded.');
+        alert('Granted [' + tier.label + '] ' + ach.name + ' to ' + username + '. +$' + tier.reward.toLocaleString() + ' CAD awarded.');
     } catch(e) {
         alert('Error saving: ' + e.message);
     }
