@@ -338,16 +338,7 @@ async function saveAccountsToDisk() {
 }
 
 function renderProfilesTray() {
-    const tray = document.getElementById('profiles-tray');
-    const container = document.getElementById('profiles-list-buttons');
-    container.innerHTML = '';
-    let userKeys = Object.keys(gameState.users);
-    if (userKeys.length > 0) {
-        tray.style.display = 'block';
-        userKeys.forEach(username => {
-            container.innerHTML += '<button class="profile-badge-btn" onclick="selectUserField(\'' + username + '\')"> ' + username + '</button>';
-        });
-    } else { tray.style.display = 'none'; }
+    // Profiles tray removed from UI — stub kept to avoid errors
 }
 
 function selectUserField(username) {
