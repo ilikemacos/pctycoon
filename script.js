@@ -230,7 +230,11 @@ async function loadAccountsFromDisk() {
                     password: row.password,
                     points: row.points,
                     builds: row.builds,
-                    inventory: row.inventory
+                    inventory: row.inventory,
+                    unlockedAchievements: row.unlocked_achievements || [],
+                    benchmarks: row.benchmarks || 0,
+                    correct: row.correct || 0,
+                    chatMessages: row.chat_messages || 0
                 };
             });
         }
@@ -296,7 +300,11 @@ async function saveAccountsToDisk() {
             password: user.password,
             points: user.points,
             builds: user.builds,
-            inventory: user.inventory
+            inventory: user.inventory,
+            unlocked_achievements: user.unlockedAchievements || [],
+            benchmarks: user.benchmarks || 0,
+            correct: user.correct || 0,
+            chat_messages: user.chatMessages || 0
         }, { onConflict: 'username' });
         if (error) throw error;
         // Refresh all users from Supabase so admin panel stays in sync
@@ -429,7 +437,7 @@ function updateHUD() {
     for (let key in currentUser.inventory) { totalParts += currentUser.inventory[key]; }
     document.getElementById('hud-parts').innerText = totalParts + " Pcs";
     document.getElementById('hud-builds').innerText = currentUser.builds + " Built";
-    renderInventoryAndSelectors(); renderShopButtons(); updatePrebuiltButtons(); renderAdminPanel();
+    renderInventoryAndSelectors(); renderShopButtons(); updatePrebuiltButtons(); renderAdminPanel(); renderAchievements();
 }
 
 function filterShop(category) {
@@ -1015,17 +1023,41 @@ const ACHIEVEMENTS = [
     { id: 'chat_msg',       icon: '', name: 'Social',            desc: 'Send your first chat message.',                    check: (u) => (u.chatMessages || 0) >= 1 },
 ];
 
-function renderAchievements() {
+async function renderAchievements() {
     const grid = document.getElementById('achievements-grid');
     if (!grid || !gameState.activeUser) return;
     const user = gameState.users[gameState.activeUser];
+
+    // Track which achievements were already unlocked before this render
+    if (!user.unlockedAchievements) user.unlockedAchievements = [];
+
+    let newlyUnlocked = [];
+    ACHIEVEMENTS.forEach(function(a) {
+        const unlocked = a.check(user);
+        if (unlocked && !user.unlockedAchievements.includes(a.id)) {
+            user.unlockedAchievements.push(a.id);
+            newlyUnlocked.push(a.name);
+            user.points += 400;
+        }
+    });
+
+    // Save if anything new was unlocked
+    if (newlyUnlocked.length > 0) {
+        await saveAccountsToDisk();
+        updateHUD();
+        newlyUnlocked.forEach(function(name) {
+            logWorkshop('Achievement unlocked: ' + name + ' — +$400 CAD awarded!');
+        });
+    }
+
     grid.innerHTML = ACHIEVEMENTS.map(function(a) {
         const unlocked = a.check(user);
         return '<div style="background:' + (unlocked ? 'rgba(234,179,8,0.08)' : 'rgba(15,23,42,0.4)') + '; border:1px solid ' + (unlocked ? '#eab308' : '#1e293b') + '; border-radius:10px; padding:14px; display:flex; gap:12px; align-items:center; opacity:' + (unlocked ? '1' : '0.45') + ';">' +
-            '<div style="font-size:26pt; line-height:1;">' + a.icon + '</div>' +
+            '<div style="font-size:22pt; line-height:1;">' + a.icon + '</div>' +
             '<div>' +
-                '<div style="font-weight:900; font-size:9.5pt; color:' + (unlocked ? '#eab308' : '#94a3b8') + ';">' + a.name + (unlocked ? ' ' : ' ') + '</div>' +
+                '<div style="font-weight:900; font-size:9.5pt; color:' + (unlocked ? '#eab308' : '#94a3b8') + ';">' + a.name + (unlocked ? ' [UNLOCKED]' : ' [LOCKED]') + '</div>' +
                 '<div style="font-size:8pt; color:#64748b; margin-top:2px;">' + a.desc + '</div>' +
+                (unlocked ? '<div style="font-size:7.5pt; color:#22c55e; margin-top:3px; font-weight:bold;">+$400 CAD reward</div>' : '') +
             '</div>' +
         '</div>';
     }).join('');
