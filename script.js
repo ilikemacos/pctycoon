@@ -862,18 +862,25 @@ async function renderAdminPanel() {
         const cardColor = isSelf ? 'rgba(239,68,68,0.08)' : 'rgba(30,41,59,0.6)';
         const borderColor = isSelf ? '#ef4444' : '#334155';
 
+        // Build achievement select options
+        const achOptions = ACHIEVEMENTS.map(function(a) {
+            const tier = TIER_CONFIG[a.tier] || TIER_CONFIG.normal;
+            const owned = (user.unlockedAchievements || []).includes(a.id);
+            return `<option value="${a.id}" ${owned ? 'disabled' : ''}>${owned ? '[DONE] ' : ''}${a.name} (${tier.label})</option>`;
+        }).join('');
+
         grid.innerHTML += `
             <div style="background:${cardColor}; border:1px solid ${borderColor}; border-radius:8px; padding:14px;">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                     <span style="font-weight:900; font-size:10pt; color:${isSelf ? '#f87171' : '#f8fafc'};">
-                         ${username}${isSelf ? ' <span style="font-size:7pt; color:#ef4444;">[ADMIN]</span>' : ''}
+                        ${username}${isSelf ? ' <span style="font-size:7pt; color:#ef4444;">[ADMIN]</span>' : ''}
                     </span>
                     <span style="font-size:8.5pt; color:#4ade80; font-family:monospace; font-weight:bold;">
                         $${user.points.toLocaleString()} CAD
                     </span>
                 </div>
                 <div style="font-size:8pt; color:#94a3b8; margin-bottom:10px;">
-                     Password: ${user.password} &nbsp;|&nbsp; Builds: ${user.builds} &nbsp;|&nbsp; Parts: ${Object.values(user.inventory).reduce((a,b)=>a+b,0)}
+                    Password: ${user.password} &nbsp;|&nbsp; Builds: ${user.builds} &nbsp;|&nbsp; Parts: ${Object.values(user.inventory).reduce((a,b)=>a+b,0)}
                 </div>
                 <div style="display:flex; gap:6px; align-items:center;">
                     <input
@@ -888,16 +895,78 @@ async function renderAdminPanel() {
                     <button
                         onclick="adminAdjustFunds('${username}', 'add')"
                         style="flex:1; background:#22c55e; border:none; border-bottom:3px solid #16a34a; color:white; padding:7px; font-weight:bold; border-radius:6px; cursor:pointer; font-size:8.5pt;">
-                         Add
+                        Add
                     </button>
                     <button
                         onclick="adminAdjustFunds('${username}', 'deduct')"
                         style="flex:1; background:#ef4444; border:none; border-bottom:3px solid #b91c1c; color:white; padding:7px; font-weight:bold; border-radius:6px; cursor:pointer; font-size:8.5pt;">
-                         Deduct
+                        Deduct
                     </button>
+                </div>
+                <div style="margin-top:10px; border-top:1px solid #1e293b; padding-top:10px;">
+                    <div style="font-size:7.5pt; color:#94a3b8; margin-bottom:6px; font-weight:bold;">GRANT ACHIEVEMENT</div>
+                    <div style="display:flex; gap:6px;">
+                        <select id="admin-ach-${username}" style="flex:1; background:#0f172a; border:1px solid #475569; color:#f8fafc; padding:6px 8px; border-radius:5px; font-size:8pt;">
+                            <option value="">-- Select Achievement --</option>
+                            ${achOptions}
+                        </select>
+                        <button
+                            onclick="adminGrantAchievement('${username}')"
+                            style="background:#a855f7; border:none; border-bottom:3px solid #7e22ce; color:white; padding:6px 12px; font-weight:bold; border-radius:6px; cursor:pointer; font-size:8pt;">
+                            Grant
+                        </button>
+                    </div>
                 </div>
             </div>`;
     });
+}
+
+async function adminGrantAchievement(username) {
+    const select = document.getElementById('admin-ach-' + username);
+    const achId = select ? select.value : '';
+    if (!achId) { alert('Select an achievement first.'); return; }
+
+    const ach = ACHIEVEMENTS.find(function(a) { return a.id === achId; });
+    if (!ach) return;
+
+    const user = gameState.users[username];
+    if (!user) return;
+    if (!user.unlockedAchievements) user.unlockedAchievements = [];
+
+    if (user.unlockedAchievements.includes(achId)) {
+        alert(username + ' already has this achievement.');
+        return;
+    }
+
+    const tier = TIER_CONFIG[ach.tier] || TIER_CONFIG.normal;
+    user.unlockedAchievements.push(achId);
+    user.points += tier.reward;
+
+    try {
+        await db.from('users').upsert({
+            username: username,
+            password: user.password,
+            points: user.points,
+            builds: user.builds,
+            inventory: user.inventory,
+            unlocked_achievements: user.unlockedAchievements,
+            benchmarks: user.benchmarks || 0,
+            correct: user.correct || 0,
+            chat_messages: user.chatMessages || 0,
+            level: user.level || 1,
+            xp: user.xp || 0,
+            prestige: user.prestige || 0,
+            streak: user.streak || 0,
+            last_login: user.lastLogin || ''
+        }, { onConflict: 'username' });
+        alert('Granted [' + tier.label + '] ' + ach.name + ' to ' + username + '.
++$' + tier.reward.toLocaleString() + ' CAD awarded.');
+    } catch(e) {
+        alert('Error saving: ' + e.message);
+    }
+
+    if (username === gameState.activeUser) updateHUD();
+    renderAdminPanel();
 }
 
 async function adminAdjustFunds(username, action) {
