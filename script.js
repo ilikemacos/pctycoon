@@ -447,7 +447,7 @@ function updateHUD() {
     for (let key in currentUser.inventory) { totalParts += currentUser.inventory[key]; }
     document.getElementById('hud-parts').innerText = totalParts + " Pcs";
     document.getElementById('hud-builds').innerText = currentUser.builds + " Built";
-    renderInventoryAndSelectors(); renderShopButtons(); updatePrebuiltButtons(); renderAdminPanel(); renderAchievements();
+    renderInventoryAndSelectors(); renderShopButtons(); updatePrebuiltButtons(); renderAdminPanel(); renderAchievements(); renderLevelBar();
 }
 
 function filterShop(category) {
@@ -1373,9 +1373,5 @@ function checkDailyStreak() {
 }
 
 //  HUD UPDATES 
-// Hook level bar + streak into updateHUD
-const _origUpdateHUD = updateHUD;
-function updateHUD() {
-    _origUpdateHUD();
-    renderLevelBar();
-}
+// Hook level bar into updateHUD via direct call at end of original
+// (override removed — renderLevelBar called inside updateHUD directly below)
