@@ -1000,67 +1000,116 @@ function hexToRgb(hex) {
 // 
 
 //  ACHIEVEMENTS DEFINITION 
+// Tiers: normal=$100, rare=$200, super_rare=$300, epic=$650, mythic=$750, legendary=$1000, ultra_legendary=$1500
+const TIER_CONFIG = {
+    normal:          { label: 'NORMAL',          color: '#94a3b8', bg: 'rgba(148,163,184,0.08)', reward: 100  },
+    rare:            { label: 'RARE',            color: '#22c55e', bg: 'rgba(34,197,94,0.08)',   reward: 200  },
+    super_rare:      { label: 'SUPER RARE',      color: '#0ea5e9', bg: 'rgba(14,165,233,0.08)',  reward: 300  },
+    epic:            { label: 'EPIC',            color: '#a855f7', bg: 'rgba(168,85,247,0.08)',  reward: 650  },
+    mythic:          { label: 'MYTHIC',          color: '#f97316', bg: 'rgba(249,115,22,0.08)',  reward: 750  },
+    legendary:       { label: 'LEGENDARY',       color: '#eab308', bg: 'rgba(234,179,8,0.08)',   reward: 1000 },
+    ultra_legendary: { label: 'ULTRA LEGENDARY', color: '#ef4444', bg: 'rgba(239,68,68,0.08)',   reward: 1500 },
+};
+
 const ACHIEVEMENTS = [
-    { id: 'first_login',    icon: '', name: 'Welcome!',          desc: 'Log in for the first time.',                       check: (u) => true },
-    { id: 'first_purchase', icon: '', name: 'First Buy',         desc: 'Purchase your first component.',                   check: (u) => Object.values(u.inventory).reduce((a,b)=>a+b,0) >= 1 },
-    { id: 'first_build',    icon: '', name: 'Builder',           desc: 'Assemble your first PC.',                          check: (u) => u.builds >= 1 },
-    { id: 'build_5',        icon: '', name: 'Workshop Pro',      desc: 'Assemble 5 PCs.',                                  check: (u) => u.builds >= 5 },
-    { id: 'build_10',       icon: '', name: 'Factory Floor',     desc: 'Assemble 10 PCs.',                                 check: (u) => u.builds >= 10 },
-    { id: 'broke',          icon: '', name: 'Broke',             desc: 'Spend down to under $100 CAD.',                    check: (u) => u.points < 100 },
-    { id: 'rich_1k',        icon: '', name: 'Getting Rich',      desc: 'Have $10,000 CAD in your account.',                check: (u) => u.points >= 10000 },
-    { id: 'rich_50k',       icon: '', name: 'Tycoon',            desc: 'Have $50,000 CAD in your account.',                check: (u) => u.points >= 50000 },
-    { id: 'rich_100k',      icon: '', name: 'Hardware Mogul',    desc: 'Have $100,000 CAD in your account.',               check: (u) => u.points >= 100000 },
-    { id: 'parts_10',       icon: '', name: 'Hoarder',           desc: 'Own 10 or more parts in total.',                   check: (u) => Object.values(u.inventory).reduce((a,b)=>a+b,0) >= 10 },
-    { id: 'parts_25',       icon: '', name: 'Warehouse',         desc: 'Own 25 or more parts in total.',                   check: (u) => Object.values(u.inventory).reduce((a,b)=>a+b,0) >= 25 },
-    { id: 'benchmark',      icon: '', name: 'Benchmarker',       desc: 'Run your first benchmark.',                        check: (u) => (u.benchmarks || 0) >= 1 },
-    { id: 'benchmark_10',   icon: '', name: 'Stress Tester',     desc: 'Run 10 benchmarks.',                               check: (u) => (u.benchmarks || 0) >= 10 },
-    { id: 'quiz_correct',   icon: '', name: 'Brain',             desc: 'Answer your first quiz question correctly.',       check: (u) => (u.correct || 0) >= 1 },
-    { id: 'quiz_10',        icon: '', name: 'Student',           desc: 'Answer 10 quiz questions correctly.',              check: (u) => (u.correct || 0) >= 10 },
-    { id: 'quiz_50',        icon: '', name: 'Hardware Scholar',  desc: 'Answer 50 quiz questions correctly.',              check: (u) => (u.correct || 0) >= 50 },
-    { id: 'gtx_1080ti',     icon: '', name: 'Titan Owner',       desc: 'Own a GTX 1080 Ti.',                               check: (u) => (u.inventory['nv_gtx1080ti'] || 0) >= 1 },
-    { id: 'rtx_5090',       icon: '', name: 'Blackwell Beast',   desc: 'Own an RTX 5090.',                                 check: (u) => (u.inventory['nv_5090'] || 0) >= 1 },
-    { id: 'all_nvidia',     icon: '', name: 'Team Green',        desc: 'Own at least one of every NVIDIA RTX 5000 GPU.',   check: (u) => ['nv_5060','nv_5070','nv_5070ti','nv_5080','nv_5090'].every(k => (u.inventory[k]||0)>=1) },
-    { id: 'chat_msg',       icon: '', name: 'Social',            desc: 'Send your first chat message.',                    check: (u) => (u.chatMessages || 0) >= 1 },
+    // NORMAL — $100
+    { id: 'first_login',    tier: 'normal',          name: 'Welcome!',           desc: 'Log in for the first time.',                                    check: (u) => true },
+    { id: 'first_purchase', tier: 'normal',          name: 'First Buy',          desc: 'Purchase your first component.',                                check: (u) => Object.values(u.inventory).reduce((a,b)=>a+b,0) >= 1 },
+    { id: 'broke',          tier: 'normal',          name: 'Broke',              desc: 'Spend down to under $100 CAD.',                                 check: (u) => u.points < 100 },
+    { id: 'chat_msg',       tier: 'normal',          name: 'Social',             desc: 'Send your first chat message.',                                 check: (u) => (u.chatMessages || 0) >= 1 },
+    { id: 'benchmark',      tier: 'normal',          name: 'Benchmarker',        desc: 'Run your first benchmark.',                                     check: (u) => (u.benchmarks || 0) >= 1 },
+    { id: 'quiz_correct',   tier: 'normal',          name: 'Brain',              desc: 'Answer your first quiz question correctly.',                    check: (u) => (u.correct || 0) >= 1 },
+    // RARE — $200
+    { id: 'first_build',    tier: 'rare',            name: 'Builder',            desc: 'Assemble your first PC.',                                       check: (u) => u.builds >= 1 },
+    { id: 'parts_10',       tier: 'rare',            name: 'Hoarder',            desc: 'Own 10 or more parts in total.',                                check: (u) => Object.values(u.inventory).reduce((a,b)=>a+b,0) >= 10 },
+    { id: 'quiz_10',        tier: 'rare',            name: 'Student',            desc: 'Answer 10 quiz questions correctly.',                           check: (u) => (u.correct || 0) >= 10 },
+    { id: 'chat_10',        tier: 'rare',            name: 'Chatterbox',         desc: 'Send 10 chat messages.',                                        check: (u) => (u.chatMessages || 0) >= 10 },
+    { id: 'benchmark_5',    tier: 'rare',            name: 'Stress Tester',      desc: 'Run 5 benchmarks.',                                             check: (u) => (u.benchmarks || 0) >= 5 },
+    // SUPER RARE — $300
+    { id: 'build_5',        tier: 'super_rare',      name: 'Workshop Pro',       desc: 'Assemble 5 PCs.',                                               check: (u) => u.builds >= 5 },
+    { id: 'parts_25',       tier: 'super_rare',      name: 'Warehouse',          desc: 'Own 25 or more parts in total.',                                check: (u) => Object.values(u.inventory).reduce((a,b)=>a+b,0) >= 25 },
+    { id: 'benchmark_10',   tier: 'super_rare',      name: 'Overclocker',        desc: 'Run 10 benchmarks.',                                            check: (u) => (u.benchmarks || 0) >= 10 },
+    { id: 'quiz_25',        tier: 'super_rare',      name: 'Hardware Nerd',      desc: 'Answer 25 quiz questions correctly.',                           check: (u) => (u.correct || 0) >= 25 },
+    { id: 'gtx_1080',       tier: 'super_rare',      name: 'Pascal Pioneer',     desc: 'Own a GTX 1080.',                                               check: (u) => (u.inventory['nv_gtx1080'] || 0) >= 1 },
+    { id: 'rich_1k',        tier: 'super_rare',      name: 'Getting Rich',       desc: 'Have $10,000 CAD in your account.',                             check: (u) => u.points >= 10000 },
+    // EPIC — $650
+    { id: 'build_10',       tier: 'epic',            name: 'Factory Floor',      desc: 'Assemble 10 PCs.',                                              check: (u) => u.builds >= 10 },
+    { id: 'quiz_50',        tier: 'epic',            name: 'Hardware Scholar',   desc: 'Answer 50 quiz questions correctly.',                           check: (u) => (u.correct || 0) >= 50 },
+    { id: 'parts_50',       tier: 'epic',            name: 'Stockpiler',         desc: 'Own 50 or more parts in total.',                                check: (u) => Object.values(u.inventory).reduce((a,b)=>a+b,0) >= 50 },
+    { id: 'gtx_1080ti',     tier: 'epic',            name: 'Titan Owner',        desc: 'Own a GTX 1080 Ti.',                                            check: (u) => (u.inventory['nv_gtx1080ti'] || 0) >= 1 },
+    { id: 'benchmark_25',   tier: 'epic',            name: 'Benchmark King',     desc: 'Run 25 benchmarks.',                                            check: (u) => (u.benchmarks || 0) >= 25 },
+    { id: 'rich_50k',       tier: 'epic',            name: 'Tycoon',             desc: 'Have $50,000 CAD in your account.',                             check: (u) => u.points >= 50000 },
+    // MYTHIC — $750
+    { id: 'build_25',       tier: 'mythic',          name: 'Assembly Legend',    desc: 'Assemble 25 PCs.',                                              check: (u) => u.builds >= 25 },
+    { id: 'quiz_100',       tier: 'mythic',          name: 'PC Encyclopedia',    desc: 'Answer 100 quiz questions correctly.',                          check: (u) => (u.correct || 0) >= 100 },
+    { id: 'rtx_5080',       tier: 'mythic',          name: 'Blackwell Elite',    desc: 'Own an RTX 5080.',                                              check: (u) => (u.inventory['nv_5080'] || 0) >= 1 },
+    { id: 'rich_100k',      tier: 'mythic',          name: 'Hardware Mogul',     desc: 'Have $100,000 CAD in your account.',                            check: (u) => u.points >= 100000 },
+    { id: 'amd_9070xt',     tier: 'mythic',          name: 'Team Red Elite',     desc: 'Own an RX 9070 XT.',                                            check: (u) => (u.inventory['amd_9070xt'] || 0) >= 1 },
+    // LEGENDARY — $1000
+    { id: 'rtx_5090',       tier: 'legendary',       name: 'Blackwell Beast',    desc: 'Own an RTX 5090.',                                              check: (u) => (u.inventory['nv_5090'] || 0) >= 1 },
+    { id: 'rich_250k',      tier: 'legendary',       name: 'PC Millionaire',     desc: 'Have $250,000 CAD in your account.',                            check: (u) => u.points >= 250000 },
+    { id: 'build_50',       tier: 'legendary',       name: 'Mega Factory',       desc: 'Assemble 50 PCs.',                                              check: (u) => u.builds >= 50 },
+    { id: 'quiz_200',       tier: 'legendary',       name: 'Omniscient',         desc: 'Answer 200 quiz questions correctly.',                          check: (u) => (u.correct || 0) >= 200 },
+    { id: 'all_rtx5',       tier: 'legendary',       name: 'Team Green',         desc: 'Own at least one of every RTX 5000 GPU.',                       check: (u) => ['nv_5060','nv_5070','nv_5070ti','nv_5080','nv_5090'].every(k => (u.inventory[k]||0)>=1) },
+    // ULTRA LEGENDARY — $1500
+    { id: 'rich_1m',        tier: 'ultra_legendary', name: 'Hardware God',       desc: 'Have $1,000,000 CAD in your account.',                          check: (u) => u.points >= 1000000 },
+    { id: 'build_100',      tier: 'ultra_legendary', name: 'Infinite Factory',   desc: 'Assemble 100 PCs.',                                             check: (u) => u.builds >= 100 },
+    { id: 'all_amd_rdna4',  tier: 'ultra_legendary', name: 'Full RDNA 4',        desc: 'Own both the RX 9070 and RX 9070 XT.',                          check: (u) => ['amd_9070','amd_9070xt'].every(k => (u.inventory[k]||0)>=1) },
+    { id: 'quiz_500',       tier: 'ultra_legendary', name: 'Living Manual',      desc: 'Answer 500 quiz questions correctly.',                          check: (u) => (u.correct || 0) >= 500 },
+    { id: 'all_gpus',       tier: 'ultra_legendary', name: 'GPU Collector',      desc: 'Own every single GPU in the shop.',                             check: (u) => ['nv_gt710','nv_gt730','nv_gt1030','nv_gtx750ti','nv_gtx760','nv_gtx770','nv_gtx780','nv_gtx780ti','nv_gtx960','nv_gtx970','nv_gtx980','nv_gtx980ti','nv_gtx1050ti','nv_gtx1060','nv_gtx1070','nv_gtx1070ti','nv_gtx1080','nv_gtx1080ti','nv_gtx1650','nv_gtx1660','nv_1660s','nv_gtx1660ti','nv_3060','nv_3070','nv_3080','nv_4060','nv_4070','nv_4070s','nv_4080','nv_4090','nv_5060','nv_5070','nv_5070ti','nv_5080','nv_5090','amd_6600','amd_6700xt','amd_7600','amd_7700xt','amd_7800xt','amd_7900xt','amd_7900xtx','amd_9070','amd_9070xt'].every(k => (u.inventory[k]||0)>=1) },
 ];
 
 async function renderAchievements() {
     const grid = document.getElementById('achievements-grid');
     if (!grid || !gameState.activeUser) return;
     const user = gameState.users[gameState.activeUser];
-
-    // Track which achievements were already unlocked before this render
     if (!user.unlockedAchievements) user.unlockedAchievements = [];
 
     let newlyUnlocked = [];
     ACHIEVEMENTS.forEach(function(a) {
         const unlocked = a.check(user);
         if (unlocked && !user.unlockedAchievements.includes(a.id)) {
+            const tier = TIER_CONFIG[a.tier] || TIER_CONFIG.normal;
             user.unlockedAchievements.push(a.id);
-            newlyUnlocked.push(a.name);
-            user.points += 400;
+            newlyUnlocked.push({ name: a.name, reward: tier.reward, tier: tier.label });
+            user.points += tier.reward;
         }
     });
 
-    // Save if anything new was unlocked
     if (newlyUnlocked.length > 0) {
         await saveAccountsToDisk();
         updateHUD();
-        newlyUnlocked.forEach(function(name) {
-            logWorkshop('Achievement unlocked: ' + name + ' — +$400 CAD awarded!');
+        newlyUnlocked.forEach(function(a) {
+            logWorkshop('[' + a.tier + '] Achievement unlocked: ' + a.name + ' — +$' + a.reward.toLocaleString() + ' CAD!');
         });
     }
 
-    grid.innerHTML = ACHIEVEMENTS.map(function(a) {
-        const unlocked = a.check(user);
-        return '<div style="background:' + (unlocked ? 'rgba(234,179,8,0.08)' : 'rgba(15,23,42,0.4)') + '; border:1px solid ' + (unlocked ? '#eab308' : '#1e293b') + '; border-radius:10px; padding:14px; display:flex; gap:12px; align-items:center; opacity:' + (unlocked ? '1' : '0.45') + ';">' +
-            '<div style="font-size:22pt; line-height:1;">' + a.icon + '</div>' +
-            '<div>' +
-                '<div style="font-weight:900; font-size:9.5pt; color:' + (unlocked ? '#eab308' : '#94a3b8') + ';">' + a.name + (unlocked ? ' [UNLOCKED]' : ' [LOCKED]') + '</div>' +
-                '<div style="font-size:8pt; color:#64748b; margin-top:2px;">' + a.desc + '</div>' +
-                (unlocked ? '<div style="font-size:7.5pt; color:#22c55e; margin-top:3px; font-weight:bold;">+$400 CAD reward</div>' : '') +
-            '</div>' +
-        '</div>';
-    }).join('');
+    // Group by tier for display
+    const tierOrder = ['ultra_legendary','legendary','mythic','epic','super_rare','rare','normal'];
+    let html = '';
+    tierOrder.forEach(function(tierKey) {
+        const tierCfg = TIER_CONFIG[tierKey];
+        const tierAchs = ACHIEVEMENTS.filter(function(a) { return a.tier === tierKey; });
+        if (tierAchs.length === 0) return;
+        html += '<div style="grid-column:1/-1; margin-top:10px; margin-bottom:4px;">' +
+            '<span style="font-size:8pt; font-weight:900; color:' + tierCfg.color + '; letter-spacing:2px; text-transform:uppercase; border-bottom:1px solid ' + tierCfg.color + '; padding-bottom:3px;">' +
+            tierCfg.label + ' — $' + tierCfg.reward.toLocaleString() + ' CAD reward</span></div>';
+        tierAchs.forEach(function(a) {
+            const unlocked = a.check(user);
+            html += '<div style="background:' + (unlocked ? tierCfg.bg : 'rgba(15,23,42,0.4)') + '; border:1px solid ' + (unlocked ? tierCfg.color : '#1e293b') + '; border-radius:10px; padding:14px; display:flex; gap:12px; align-items:center; opacity:' + (unlocked ? '1' : '0.4') + ';">' +
+                '<div>' +
+                    '<div style="display:flex; align-items:center; gap:8px;">' +
+                        '<span style="font-weight:900; font-size:9.5pt; color:' + (unlocked ? tierCfg.color : '#64748b') + ';">' + a.name + '</span>' +
+                        '<span style="font-size:7pt; font-weight:900; color:' + tierCfg.color + '; background:' + tierCfg.bg + '; border:1px solid ' + tierCfg.color + '; padding:1px 6px; border-radius:4px;">' + tierCfg.label + '</span>' +
+                        (unlocked ? '<span style="font-size:7pt; color:#22c55e; font-weight:bold;">UNLOCKED</span>' : '<span style="font-size:7pt; color:#475569;">LOCKED</span>') +
+                    '</div>' +
+                    '<div style="font-size:8pt; color:#64748b; margin-top:3px;">' + a.desc + '</div>' +
+                    '<div style="font-size:7.5pt; color:' + (unlocked ? '#22c55e' : '#475569') + '; margin-top:3px; font-weight:bold;">' + (unlocked ? '+$' + tierCfg.reward.toLocaleString() + ' CAD earned' : 'Reward: $' + tierCfg.reward.toLocaleString() + ' CAD') + '</div>' +
+                '</div>' +
+            '</div>';
+        });
+    });
+    grid.innerHTML = html;
 }
 
 //  ONLINE PRESENCE 
