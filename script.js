@@ -208,7 +208,7 @@ let currentQuestionIdx = 0;
 let selectedQuizAnswer = null;
 let quizEvaluated = false;
 
-//  SUPABASE INIT (Ver 1.8.9a Pulsar) 
+//  SUPABASE INIT (Ver 1.14.6b) 
 const SUPABASE_URL = "https://hkuwkajmgieptgotgmuc.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhrdXdrYWptZ2llcHRnb3RnbXVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyMjE2NjksImV4cCI6MjA5Njc5NzY2OX0.GJhJAE5WlRDNxO9BprFewK75lir4cHnJ_0W-v246-SQ";
 const { createClient } = supabase;
@@ -234,7 +234,12 @@ async function loadAccountsFromDisk() {
                     unlockedAchievements: row.unlocked_achievements || [],
                     benchmarks: row.benchmarks || 0,
                     correct: row.correct || 0,
-                    chatMessages: row.chat_messages || 0
+                    chatMessages: row.chat_messages || 0,
+                    level: row.level || 1,
+                    xp: row.xp || 0,
+                    prestige: row.prestige || 0,
+                    streak: row.streak || 0,
+                    lastLogin: row.last_login || ''
                 };
             });
         }
@@ -304,7 +309,12 @@ async function saveAccountsToDisk() {
             unlocked_achievements: user.unlockedAchievements || [],
             benchmarks: user.benchmarks || 0,
             correct: user.correct || 0,
-            chat_messages: user.chatMessages || 0
+            chat_messages: user.chatMessages || 0,
+            level: user.level || 1,
+            xp: user.xp || 0,
+            prestige: user.prestige || 0,
+            streak: user.streak || 0,
+            last_login: user.lastLogin || ''
         }, { onConflict: 'username' });
         if (error) throw error;
         // Refresh all users from Supabase so admin panel stays in sync
@@ -383,7 +393,7 @@ function applyUserProfile(username) {
     document.getElementById('auth-box').style.display = 'none';
     document.getElementById('main-game-workspace').style.display = 'block';
     document.getElementById('hud-user').innerText = username;
-    renderShop(); loadNextQuestion(); updateHUD(); renderProfilesTray(); resetBenchmarkDisplay(); renderAdminPanel(); updateOnlinePresence(); setInterval(updateOnlinePresence, 60000);
+    renderShop(); loadNextQuestion(); updateHUD(); renderProfilesTray(); resetBenchmarkDisplay(); renderAdminPanel(); updateOnlinePresence(); setInterval(updateOnlinePresence, 60000); checkDailyStreak();
 }
 
 async function accountLogout() {
@@ -758,39 +768,41 @@ function triggerSystemAssembly() {
     const cooler = document.getElementById('slot-cooler').value; const display = document.getElementById('slot-display').value;
 
     if (cpu && gpu && ram && ssd && cooler && display) {
+        // Calculate part costs and sell price (parts cost + 25% profit margin * prestige multiplier)
+        const partsCost = catalog[cpu].cost + catalog[gpu].cost + catalog[ram].cost + catalog[ssd].cost + catalog[cooler].cost + catalog[display].cost;
+        const prestigeBonus = 1 + ((currentUser.prestige || 0) * 0.1);
+        const levelBonus = 1 + ((currentUser.level || 1) * 0.02);
+        const sellPrice = Math.floor(partsCost * 1.25 * prestigeBonus * levelBonus);
+        const profit = sellPrice - partsCost;
+
         currentUser.inventory[cpu]--; currentUser.inventory[gpu]--; currentUser.inventory[ram]--; 
         currentUser.inventory[ssd]--; currentUser.inventory[cooler]--; currentUser.inventory[display]--;
         
         currentUser.builds++;
-        logWorkshop(" Rig compiled and deployed successfully!");
+        currentUser.points += sellPrice;
+        addXP(currentUser, 200 + Math.floor(partsCost * 0.05));
+
+        logWorkshop("Rig compiled and sold for $" + sellPrice.toLocaleString() + " CAD (parts cost: $" + partsCost.toLocaleString() + " | profit: $" + profit.toLocaleString() + ")");
 
         if (cpu === 'cpu_7600x' && gpu === 'nv_3060') {
             currentUser.points += 750;
-            logWorkshop(" BUDGET BONUS: Fulfilled Ryzen 5 7600X + RTX 3060 configuration! Earned +$750 CAD.");
-            alert(" Objective Fulfilled! Budget category rig distributed. Wired +$750 CAD bonus!");
+            logWorkshop("BUDGET BONUS: Fulfilled Ryzen 5 7600X + RTX 3060 configuration! Earned +$750 CAD.");
         }
-        
         if (cpu === 'cpu_7800x3d' && gpu === 'amd_7900xt') {
             currentUser.points += 1250;
-            logWorkshop(" MID-RANGE BONUS: Fulfilled Ryzen 7 7800X3D + RX 7900 XT configuration! Earned +$1,250 CAD.");
-            alert(" Objective Fulfilled! Mid-Range performance category rig distributed. Wired +$1,250 CAD bonus!");
+            logWorkshop("MID-RANGE BONUS: Fulfilled Ryzen 7 7800X3D + RX 7900 XT configuration! Earned +$1,250 CAD.");
         }
-
         if (cpu === 'cpu_9850x3d' && (gpu === 'nv_5070ti' || gpu === 'nv_5080')) {
             currentUser.points += 2200;
-            logWorkshop(" ENTHUSIAST BONUS: Fulfilled Ryzen 7 9850X3D + " + catalog[gpu].name.split(' (')[0] + " configuration! Earned +$2,200 CAD.");
-            alert(" Objective Fulfilled! Next-Gen Enthusiast category rig distributed. Wired +$2,200 CAD bonus!");
+            logWorkshop("ENTHUSIAST BONUS: Fulfilled Ryzen 7 9850X3D + " + catalog[gpu].name.split(' (')[0] + " configuration! Earned +$2,200 CAD.");
         }
-
         if (currentUser.builds === 1) {
             currentUser.points += 500;
-            logWorkshop(" GRAND OPENING PRIZE: Handed +$500 CAD Cash Prize for shipping your first machine!");
-            alert(" First Build Milestone Completed! The hardware firm has wired you a bonus +$500 CAD prize!");
-        } 
+            logWorkshop("GRAND OPENING PRIZE: +$500 CAD for your first build!");
+        }
         else if (currentUser.builds % 3 === 0) {
             currentUser.points += 1000;
-            logWorkshop(" PRODUCTION MULTIPLIER HIT: Issued +$1,000 CAD Production Bonus Grant!");
-            alert(" Milestone Achieved! You reached " + currentUser.builds + " built systems. Enjoy your +$1,000 CAD management grant!");
+            logWorkshop("PRODUCTION BONUS: +$1,000 CAD for " + currentUser.builds + " builds!");
         }
         
         saveAccountsToDisk();
@@ -928,7 +940,7 @@ async function adminAdjustFunds(username, action) {
     renderAdminPanel();
 }
 
-//  STUDY GUIDE + PAGE SWITCHING (Ver 1.8.9a Pulsar) 
+//  STUDY GUIDE + PAGE SWITCHING (Ver 1.14.6b) 
 
 let currentStudyTopic = 'all';
 
@@ -996,7 +1008,7 @@ function hexToRgb(hex) {
 }
 
 // 
-// COMMUNITY + ACHIEVEMENTS (Ver 1.8.9a Pulsar)
+// COMMUNITY + ACHIEVEMENTS (Ver 1.14.6b)
 // 
 
 //  ACHIEVEMENTS DEFINITION 
@@ -1262,4 +1274,108 @@ function switchPage(page) {
     if (page === 'study')        { currentStudyTopic = 'all'; renderStudyCards('all'); }
     if (page === 'community')    { renderOnlinePlayers(); renderBuildRatings(); loadChatMessages(); subscribeToChatUpdates(); }
     if (page === 'achievements') { renderAchievements(); }
+}
+
+// 
+// PLAYER LEVELS, PRESTIGE & DAILY STREAK (Ver 1.14.6b)
+// 
+
+//  LEVEL SYSTEM 
+const LEVEL_TITLES = [
+    'Newcomer', 'Apprentice', 'Technician', 'Builder', 'Engineer',
+    'Senior Engineer', 'Hardware Specialist', 'Overclocker', 'Rig Master',
+    'Elite Builder', 'Hardware Expert', 'Pro Assembler', 'Certified Modder',
+    'System Architect', 'Performance Guru', 'Benchmark King',
+    'Hardware Veteran', 'Elite Overclocker', 'Silicon Legend', 'Hardware God'
+];
+
+function xpForLevel(level) { return Math.floor(500 * Math.pow(1.35, level - 1)); }
+
+function addXP(user, amount) {
+    if (!user.xp) user.xp = 0;
+    if (!user.level) user.level = 1;
+    user.xp += amount;
+    let leveled = false;
+    while (user.level < LEVEL_TITLES.length && user.xp >= xpForLevel(user.level)) {
+        user.xp -= xpForLevel(user.level);
+        user.level++;
+        leveled = true;
+        const bonus = user.level * 500;
+        user.points += bonus;
+        logWorkshop('LEVEL UP! You are now Level ' + user.level + ' — ' + LEVEL_TITLES[user.level - 1] + '! +$' + bonus.toLocaleString() + ' CAD bonus!');
+    }
+    if (leveled) { saveAccountsToDisk(); updateHUD(); }
+}
+
+function renderLevelBar() {
+    if (!gameState.activeUser) return;
+    const user = gameState.users[gameState.activeUser];
+    if (!user.level) user.level = 1;
+    if (!user.xp) user.xp = 0;
+    const level = user.level;
+    const xp = user.xp;
+    const needed = xpForLevel(level);
+    const pct = Math.min(100, Math.floor((xp / needed) * 100));
+    const title = LEVEL_TITLES[Math.min(level - 1, LEVEL_TITLES.length - 1)];
+    const prestige = user.prestige || 0;
+    const el = document.getElementById('hud-level');
+    if (el) el.innerHTML = 'Lv.' + level + ' ' + title + (prestige > 0 ? ' [P' + prestige + ']' : '') + ' &nbsp;<span style="color:#475569;font-size:8pt;">' + xp + '/' + needed + ' XP</span>';
+    const bar = document.getElementById('hud-xp-bar');
+    if (bar) bar.style.width = pct + '%';
+}
+
+//  PRESTIGE SYSTEM 
+function triggerPrestige() {
+    if (!gameState.activeUser) return;
+    const user = gameState.users[gameState.activeUser];
+    if ((user.level || 1) < 20) {
+        alert('You must reach Level 20 to Prestige!');
+        return;
+    }
+    if (!confirm('PRESTIGE?\n\nYour level and XP will reset to 1, but you keep your CAD and inventory.\nYou will earn a permanent +10% profit bonus per prestige.\n\nCurrent prestige: ' + (user.prestige || 0) + '\nNew prestige: ' + ((user.prestige || 0) + 1))) return;
+    user.prestige = (user.prestige || 0) + 1;
+    user.level = 1;
+    user.xp = 0;
+    const prestigeBonus = user.prestige * 5000;
+    user.points += prestigeBonus;
+    logWorkshop('PRESTIGE ' + user.prestige + ' ACHIEVED! Reset to Level 1. Permanent +' + (user.prestige * 10) + '% profit bonus unlocked. +$' + prestigeBonus.toLocaleString() + ' CAD prestige reward!');
+    saveAccountsToDisk();
+    updateHUD();
+    alert('Prestige ' + user.prestige + ' achieved! You earned +$' + prestigeBonus.toLocaleString() + ' CAD and a permanent profit bonus!');
+}
+
+//  DAILY STREAK 
+function checkDailyStreak() {
+    if (!gameState.activeUser) return;
+    const user = gameState.users[gameState.activeUser];
+    const today = new Date().toDateString();
+    if (!user.lastLogin) user.lastLogin = '';
+    if (!user.streak) user.streak = 0;
+
+    if (user.lastLogin === today) return; // already claimed today
+
+    const yesterday = new Date(Date.now() - 86400000).toDateString();
+    if (user.lastLogin === yesterday) {
+        user.streak++;
+    } else if (user.lastLogin !== today) {
+        user.streak = 1; // reset streak
+    }
+
+    user.lastLogin = today;
+    const streakReward = Math.min(user.streak * 150, 3000); // cap at $3000
+    user.points += streakReward;
+    saveAccountsToDisk();
+    updateHUD();
+
+    const msg = 'Daily Login Bonus!\nStreak: ' + user.streak + ' day' + (user.streak !== 1 ? 's' : '') + '\nReward: +$' + streakReward.toLocaleString() + ' CAD' + (user.streak >= 7 ? '\nHot streak! Keep it going!' : '');
+    logWorkshop('DAILY STREAK (Day ' + user.streak + '): +$' + streakReward.toLocaleString() + ' CAD login bonus!');
+    setTimeout(function() { alert(msg); }, 500);
+}
+
+//  HUD UPDATES 
+// Hook level bar + streak into updateHUD
+const _origUpdateHUD = updateHUD;
+function updateHUD() {
+    _origUpdateHUD();
+    renderLevelBar();
 }

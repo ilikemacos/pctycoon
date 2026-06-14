@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PCTycoon - Ver 1.8.9a Pulsar</title>
+    <title>PCTycoon - Ver 1.14.6b</title>
     <link rel="stylesheet" href="style.css">
     <meta name="description" content="PCTycoon - Build and manage your ultimate PC hardware empire. Buy parts, assemble rigs, benchmark systems and earn CAD. Free browser game.">
     <meta name="keywords" content="PCTycoon, PC building game, hardware tycoon, PC simulator, browser game, build a PC, gaming PC, free game">
     <meta name="author" content="ilikemacos">
-    <meta property="og:title" content="PCTycoon - Ver 1.8.9a Pulsar">
+    <meta property="og:title" content="PCTycoon - Ver 1.14.6b">
     <meta property="og:description" content="Build your PC hardware empire. Buy parts, assemble rigs and earn CAD!">
     <meta property="og:url" content="https://ilikemacos.github.io/pctycoon/">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <!-- Supabase SDK (Ver 1.8.9a Pulsar) -->
+    <!-- Supabase SDK (Ver 1.14.6b) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js"></script>
 </head>
 <body>
@@ -20,7 +20,7 @@
 <!-- User Authentication Panel Overlay -->
 <div class="account-auth-panel" id="auth-box">
     <div class="auth-header">
-        <div class="version-banner" style="background: linear-gradient(135deg, #eab308, #ca8a04); color: #0f172a; font-weight: 900;">VERSION 1.8.9a [PULSAR]</div>
+        <div class="version-banner" style="background: linear-gradient(135deg, #eab308, #ca8a04); color: #0f172a; font-weight: 900;">VERSION 1.14.6b</div>
         <h3> Create an Account or Log In</h3>
         <p>Welcome to PCTycoon! Create a new account or log in to continue.</p>
     </div>
@@ -40,11 +40,19 @@
 <div id="main-game-workspace" style="display: none;">
     <!-- Global Dashboard HUD -->
     <div class="status-bar" style="border-color: #eab308; box-shadow: 0 0 15px rgba(234, 179, 8, 0.15);">
-        <div class="status-metric"> Operator: <span id="hud-user" style="color: #38bdf8;">None</span></div>
-        <div class="status-metric"> Account Funds: <span id="hud-points" class="points-display" style="color: #eab308;">$0 CAD</span></div>
-        <div class="status-metric"> Inventory Stock: <span id="hud-parts" style="color: #a855f7;">0 Pcs</span></div>
-        <div class="status-metric"> System Assemblies: <span id="hud-builds" style="color: #0ea5e9;">0 Built</span></div>
-        <div><button class="auth-btn logout" onclick="accountLogout()" style="background:#ef4444; color:white; padding:4px 10px; font-size:8.5pt;">Logout</button></div>
+        <div class="status-metric">Operator: <span id="hud-user" style="color: #38bdf8;">None</span></div>
+        <div class="status-metric">Funds: <span id="hud-points" class="points-display" style="color: #eab308;">$0 CAD</span></div>
+        <div class="status-metric">Parts: <span id="hud-parts" style="color: #a855f7;">0 Pcs</span></div>
+        <div class="status-metric">Builds: <span id="hud-builds" style="color: #0ea5e9;">0 Built</span></div>
+        <div class="status-metric" style="font-size:9pt;"><span id="hud-level" style="color:#eab308;">Lv.1 Newcomer</span>
+            <div style="background:#1e293b; border-radius:4px; height:4px; width:100px; margin-top:3px; overflow:hidden;">
+                <div id="hud-xp-bar" style="height:100%; width:0%; background:linear-gradient(90deg,#eab308,#f97316); transition:width 0.4s;"></div>
+            </div>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;">
+            <button onclick="triggerPrestige()" style="background:#7c3aed; color:white; border:none; padding:4px 10px; border-radius:6px; font-size:8pt; font-weight:bold; cursor:pointer;">Prestige</button>
+            <button class="auth-btn logout" onclick="accountLogout()" style="background:#ef4444; color:white; padding:4px 10px; font-size:8.5pt;">Logout</button>
+        </div>
     </div>
 
 
@@ -60,7 +68,7 @@
     <div id="mzx-admin-panel" style="display:none; max-width:1300px; margin: 0 auto 20px auto;">
         <div style="background: rgba(15,23,42,0.85); border: 2px solid #ef4444; border-radius: 12px; padding: 20px; box-shadow: 0 0 25px rgba(239,68,68,0.2);">
             <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap;">
-                <span style="background:linear-gradient(135deg,#ef4444,#b91c1c); color:white; font-weight:900; font-size:8pt; padding:3px 10px; border-radius:4px;"> ADMIN ACCESS — VER 1.8.9a PULSAR</span>
+                <span style="background:linear-gradient(135deg,#ef4444,#b91c1c); color:white; font-weight:900; font-size:8pt; padding:3px 10px; border-radius:4px;"> ADMIN ACCESS — VER 1.14.6b</span>
                 <h3 style="color:#f87171; margin:0; font-size:12pt;"> Account Management Terminal</h3>
             </div>
             <div id="admin-accounts-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap:12px;"></div>
@@ -74,9 +82,9 @@
             <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
                 <div>
                     <h1>PCTycoon</h1>
-                    <p> <strong>Ver 1.8.9a Pulsar Update:</strong> Real-time hardware analytics are online. Put your constructed machines through rigorous 3DMark and Cinebench synthetic sweeps to measure raw frame computation speeds, processor capacity, and unlock scale bonuses!</p>
+                    <p> <strong>Ver 1.14.6b Update:</strong> Real-time hardware analytics are online. Put your constructed machines through rigorous 3DMark and Cinebench synthetic sweeps to measure raw frame computation speeds, processor capacity, and unlock scale bonuses!</p>
                 </div>
-                <div class="version-badge-top" style="background: linear-gradient(135deg, #f59e0b, #eab308); color: #0f172a; font-weight: 900;">VER 1.8.9a PULSAR</div>
+                <div class="version-badge-top" style="background: linear-gradient(135deg, #f59e0b, #eab308); color: #0f172a; font-weight: 900;">VER 1.14.6b</div>
             </div>
         </header>
 
@@ -168,7 +176,7 @@
                 <div class="shop-grid" id="shop-container"></div>
             </div>
 
-            <!-- MODULE D: SYSTEM RE-BENCHMARKING MATRIX (NEW IN VER 1.8.9a PULSAR) -->
+            <!-- MODULE D: SYSTEM RE-BENCHMARKING MATRIX (NEW IN VER 1.14.6b) -->
             <div class="panel benchmark-box" style="border: 2px solid #eab308; grid-column: 1 / -1; background: rgba(234, 179, 8, 0.01);">
                 <h3 style="color: #eab308; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
                     <span></span> Live Station Engine Benchmarking Lab & Stress Tester
