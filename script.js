@@ -866,7 +866,7 @@ async function renderAdminPanel() {
                     <span style="font-weight:900; font-size:10pt; color:${isSelf ? '#f87171' : '#f8fafc'};">
                         ${username}${isSelf ? ' <span style="font-size:7pt; color:#ef4444;">[ADMIN]</span>' : ''}
                     </span>
-                    <span style="font-size:8.5pt; color:#4ade80; font-family:monospace; font-weight:bold;">
+                    <span style="font-size:8.5pt; color:#4ade80;  font-weight:bold;">
                         $${user.points.toLocaleString()} CAD
                     </span>
                 </div>

@@ -1,6 +1,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
+input, button, select, textarea { font-family: inherit; }
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Caveat", cursive;
     line-height: 1.6; color: #e2e8f0; background-color: #0f172a;
     background-image: 
         radial-gradient(at 0% 0%, rgba(30, 41, 59, 0.7) 0px, transparent 50%), 
@@ -48,7 +49,7 @@ h2 { color: #38bdf8; font-size: 15pt; margin-bottom: 15px; border-left: 5px soli
 .shop-item { background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); padding: 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
 .item-info h4 { color: #f8fafc; font-size: 9.5pt; }
 .item-info span { font-size: 7.5pt; color: #94a3b8; }
-.price { color: #ef4444; font-weight: bold; font-family: monospace; }
+.price { color: #ef4444; font-weight: bold; }
 .buy-btn { background: #a855f7; border: none; border-bottom: 3px solid #7e22ce; color: white; padding: 6px 12px; font-weight: bold; border-radius: 6px; cursor: pointer; font-size: 8pt; }
 .buy-btn:disabled { background: #334155; color: #64748b; cursor: not-allowed; border:none !important; }
 
@@ -59,14 +60,14 @@ h2 { color: #38bdf8; font-size: 15pt; margin-bottom: 15px; border-left: 5px soli
 .slot-select { background: #0f172a; color: #e2e8f0; border: 1px solid #475569; padding: 8px; border-radius: 6px; width: calc(100% - 130px); font-size: 9pt; }
 .assemble-btn { width: 100%; background: #0ea5e9; border: none; border-bottom: 4px solid #0369a1; color: white; padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; text-transform: uppercase; }
 .assemble-btn:disabled { background: #334155; color: #64748b; cursor: not-allowed; border:none; }
-.build-log { margin-top: 15px; max-height: 120px; overflow-y: auto; background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; font-family: monospace; font-size: 8.5pt; color: #34d399; }
+.build-log { margin-top: 15px; max-height: 120px; overflow-y: auto; background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; font-size: 8.5pt; color: #34d399; }
 
 .rig-blueprint-frame { background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%); border: 3px dashed #334155; border-radius: 12px; padding: 25px; margin-bottom: 20px; display: grid; grid-template-columns: 1fr 1.5fr; gap: 20px; min-height: 280px; align-items: center; }
 .visual-monitor-shell { background: #27272a; border: 10px solid #18181b; border-bottom-width: 18px; border-radius: 8px; height: 180px; display: flex; justify-content: center; align-items: center; }
-.monitor-screen-glare { width: 100%; height: 100%; background: #090d16; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #475569; font-size: 8.5pt; font-family: monospace; text-align: center; padding: 10px; }
+.monitor-screen-glare { width: 100%; height: 100%; background: #090d16; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #475569; font-size: 8.5pt; text-align: center; padding: 10px; }
 .visual-pc-tower { background: rgba(30, 41, 59, 0.4); border: 4px solid #3f3f46; border-right-width: 12px; border-radius: 6px; height: 220px; position: relative; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; }
 .case-glow-indicator { position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none; }
-.hardware-die-block { background: #1e293b; border: 1px solid #475569; border-radius: 4px; padding: 6px 10px; font-size: 8pt; font-family: monospace; color: #94a3b8; }
+.hardware-die-block { background: #1e293b; border: 1px solid #475569; border-radius: 4px; padding: 6px 10px; font-size: 8pt; color: #94a3b8; }
 
 /* ── Study Guide Page (Ver 1.5.0 Kepler) ── */
 .study-tab {
