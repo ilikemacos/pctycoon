@@ -208,7 +208,7 @@ let currentQuestionIdx = 0;
 let selectedQuizAnswer = null;
 let quizEvaluated = false;
 
-//  SUPABASE INIT (Ver 1.14.6b) 
+//  SUPABASE INIT (Ver 1.17.1c Gebler) 
 const SUPABASE_URL = "https://hkuwkajmgieptgotgmuc.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhrdXdrYWptZ2llcHRnb3RnbXVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyMjE2NjksImV4cCI6MjA5Njc5NzY2OX0.GJhJAE5WlRDNxO9BprFewK75lir4cHnJ_0W-v246-SQ";
 const { createClient } = supabase;
@@ -1050,7 +1050,7 @@ async function adminAdjustFunds(username, action) {
     renderAdminPanel();
 }
 
-//  STUDY GUIDE + PAGE SWITCHING (Ver 1.14.6b) 
+//  STUDY GUIDE + PAGE SWITCHING (Ver 1.17.1c Gebler) 
 
 let currentStudyTopic = 'all';
 
@@ -1118,7 +1118,7 @@ function hexToRgb(hex) {
 }
 
 // 
-// COMMUNITY + ACHIEVEMENTS (Ver 1.14.6b)
+// COMMUNITY + ACHIEVEMENTS (Ver 1.17.1c Gebler)
 // 
 
 //  ACHIEVEMENTS DEFINITION 
@@ -1390,7 +1390,7 @@ function switchPage(page) {
 }
 
 // 
-// PLAYER LEVELS, PRESTIGE & DAILY STREAK (Ver 1.14.6b)
+// PLAYER LEVELS, PRESTIGE & DAILY STREAK (Ver 1.17.1c Gebler)
 // 
 
 //  LEVEL SYSTEM 
